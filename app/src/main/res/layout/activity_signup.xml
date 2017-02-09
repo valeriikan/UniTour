@@ -8,14 +8,98 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fi.oulu.unitour.SignupActivity">
+    tools:context="fi.oulu.unitour.activities.SignupActivity">
 
-    <ImageView
-        android:id="@+id/imgLogoRays"
-        android:src="@drawable/img_logorays"
-        android:layout_width="138dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/tvSignupSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="You can sign up with your own accounts"/>
+
+    <LinearLayout
+        android:id="@+id/layoutSignupSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvSignupSocial"
+        android:layout_marginTop="7dp">
+
+        <ImageView
+            android:id="@+id/imgSignupFacebook"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <ImageView
+            android:id="@+id/imgSignupTwitter"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <ImageView
+            android:id="@+id/imgSignupSnapchat"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSignupUnitour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/layoutSignupSocial"
+        android:layout_marginTop="60dp"
+        android:text="or with UniTour application account"/>
+
+    <EditText
+        android:id="@+id/etSignupUsername"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvSignupUnitour"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:hint="Username"/>
+
+    <EditText
+        android:id="@+id/etSignupPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etSignupUsername"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:hint="Password"/>
+
+    <EditText
+        android:id="@+id/etSignupFirstname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etSignupPassword"
+        android:textAlignment="center"
+        android:hint="First name"/>
+
+    <EditText
+        android:id="@+id/etSignupSecondname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etSignupFirstname"
+        android:textAlignment="center"
+        android:hint="Second name"/>
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etSignupSecondname"
+        android:layout_marginTop="15dp"
+        android:text="Sign up"/>
 
 </RelativeLayout>
