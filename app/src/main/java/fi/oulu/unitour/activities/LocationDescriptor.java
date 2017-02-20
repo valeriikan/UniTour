@@ -30,7 +30,6 @@ public class LocationDescriptor extends AppCompatActivity{
     }
     public void fetchInfoPostExecute(){
         //fetches location name and description form result set thrown by php script
-        TextView locNameTV = (TextView) findViewById(R.id.locNameTxt);
         TextView locDescTV = (TextView) findViewById(R.id.locDescripTxt);
         ImageView locIV = (ImageView) findViewById(R.id.locImageIV);
 
@@ -39,7 +38,7 @@ public class LocationDescriptor extends AppCompatActivity{
             JSONObject jsonResult = new JSONObject(GetLocationInfo.jsonResult);
             JSONArray locationInfo = jsonResult.getJSONArray("result");
             JSONObject jsonObject = locationInfo.getJSONObject(0);
-            locNameTV.setText(jsonObject.getString("name"));
+            setTitle(jsonObject.getString("name"));
             locDescTV.setText(jsonObject.getString("description"));
             locIV.setImageBitmap(GetLocationInfo.image);
         }

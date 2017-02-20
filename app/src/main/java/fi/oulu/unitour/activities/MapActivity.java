@@ -76,7 +76,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //Adding ground overlay to google map on university of Oulu LatLng
         //LatLng uniCentre = new LatLng(65.0593, 25.4663);
         GroundOverlayOptions overlayOptions = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.campus_map))
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.map))
                 .positionFromBounds(uniBound);
         GroundOverlay uniOverlay = campusMap.addGroundOverlay(overlayOptions);
         uniOverlay.setClickable(true);

@@ -71,13 +71,11 @@ public class GetLocationInfo extends AsyncTask<String,Void,String> {
             inputStream.close();
 
             connection.disconnect();
-            //jsonResult = BitmapFactory.decodeStream(inputStream);
-            //return jsonResult;
         } catch (IOException e) {
             // Log exception
             //return null;
         }
-        try {
+        /*try {
             String id = params[0];
             URL url = new URL(get_loc_image_url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -104,6 +102,7 @@ public class GetLocationInfo extends AsyncTask<String,Void,String> {
             // Log exception
             //return null;
         }
+        */
         return jsonResult;
     }
 
