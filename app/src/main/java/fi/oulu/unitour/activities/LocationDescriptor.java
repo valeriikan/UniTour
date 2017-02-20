@@ -41,6 +41,38 @@ public class LocationDescriptor extends AppCompatActivity{
             setTitle(jsonObject.getString("name"));
             locDescTV.setText(jsonObject.getString("description"));
             locIV.setImageBitmap(GetLocationInfo.image);
+            /*switch (jsonObject.getString("name"))
+            {
+                case "Kastari": locIV.setImageResource(R.drawable.kastari);
+                break;
+                case "Data Garage": locIV.setImageResource(R.drawable.kastari);
+                    break;
+                case "ITEE": locIV.setImageResource(R.drawable.itee);
+                    break;
+                case "Stories": locIV.setImageResource(R.drawable.stories);
+                    break;
+                case "Tellus": locIV.setImageResource(R.drawable.tellus);
+                    break;
+                case "Fablab": locIV.setImageResource(R.drawable.fablab);
+                    break;
+                case "OYY": locIV.setImageResource(R.drawable.oyy);
+                    break;
+                case "Central Station": locIV.setImageResource(R.drawable.centralstation);
+                    break;
+                case "Student Center": locIV.setImageResource(R.drawable.studentcenter);
+                    break;
+                case "Ava": locIV.setImageResource(R.drawable.aava);
+                    break;
+                case "Zoological Museum": locIV.setImageResource(R.drawable.zoologicalmuseum);
+                    break;
+                case "Balance": locIV.setImageResource(R.drawable.balance);
+                    break;
+                case "Pegasus Library": locIV.setImageResource(R.drawable.pegasuslibrary);
+                    break;
+                default:
+                    break;
+            }
+            */
         }
         catch (JSONException e)
         {
