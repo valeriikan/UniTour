@@ -34,7 +34,7 @@ public class LoginHelper extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String login_url = "http://unitour.tmweb.ru/login.php";
+        String login_url = "http://unitour.000webhostapp.com/login.php";
 
         try {
             String username = params[0];
@@ -83,7 +83,7 @@ public class LoginHelper extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String jsonResult) {
         loading.dismiss();
-        if (jsonResult.equals("Login error, please try again ")) {
+        if (jsonResult.equals("Login error, please try again")) {
             Toast.makeText(context, jsonResult, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show();

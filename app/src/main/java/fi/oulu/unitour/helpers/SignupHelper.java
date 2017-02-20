@@ -33,7 +33,7 @@ public class SignupHelper extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String signup_url = "http://unitour.tmweb.ru/signup.php";
+        String signup_url = "http://unitour.000webhostapp.com/signup.php";
 
         try {
             String username = params[0];
@@ -91,7 +91,7 @@ public class SignupHelper extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
         loading.dismiss();
         Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-        if (result.equals("Registration successful ")) {
+        if (result.equals("Registration successful")) {
             source.signupPostExecute();
         }
     }
