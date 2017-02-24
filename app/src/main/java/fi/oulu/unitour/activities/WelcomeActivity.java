@@ -12,6 +12,8 @@ import android.widget.ImageView;
 
 import fi.oulu.unitour.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override
@@ -30,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+
 
         } else { //if user not logged in - suggest to log in or register
             //attaching images to imageViews

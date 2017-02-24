@@ -6,10 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+
 import fi.oulu.unitour.R;
+
+import static android.R.attr.fingerprintAuthDrawable;
+import static android.R.attr.onClick;
+import static android.content.Context.MODE_PRIVATE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tvMainName = (TextView) findViewById(R.id.tvMainName);
         tvMainName.setText(firstnamePref + " " + secondnamePref);
+
+        Button startTour = (Button) findViewById(R.id.startTourBtn);
+        startTour.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View view) {
+                                             Intent mapIntent = new Intent(getApplicationContext(),MapActivity.class);
+                                             startActivity(mapIntent);
+                                         }
+                                     }
+        );
+
     }
 
     @Override
