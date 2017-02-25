@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,9 +26,10 @@ public class LocationDescriptor extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_descriptor);
-
+        Firebase
         GetLocationInfo showImage = new GetLocationInfo(this, this);
         showImage.execute(getIntent().getStringExtra("LOCATION_ID"));
+
     }
     public void fetchInfoPostExecute(){
         //fetches location name and description form result set thrown by php script
