@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "287364016285",
+    "firebase_url": "https://unitour-22a75.firebaseio.com",
+    "project_id": "unitour-22a75",
+    "storage_bucket": "unitour-22a75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287364016285:android:df72030046cbf980",
+        "android_client_info": {
+          "package_name": "fi.oulu.unitour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "287364016285-1gfkrsnc05r0sjl4q72bd66equnvr6fj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fi.oulu.unitour",
+            "certificate_hash": "87f5fbce0715e05df019fb1da999decbe4ab3b91"
+          }
+        },
+        {
+          "client_id": "287364016285-6lq7pdvle6lbgh5qjbn7a5cbfgl07fel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzvP0I3k-1Cyk-h2oWerlA4Aai-9sG1Tw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "287364016285-6lq7pdvle6lbgh5qjbn7a5cbfgl07fel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
