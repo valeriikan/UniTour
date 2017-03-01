@@ -1,54 +1,57 @@
 package fi.oulu.unitour.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import fi.oulu.unitour.R;
-import fi.oulu.unitour.helpers.LoginHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    ImageView imgLoginFacebook, imgLoginTwitter, imgLoginSnapchat;
-    EditText etLoginUsername, etLoginPassword;
+    ImageView imgLoginFacebook, imgLoginTwitter, imgLoginGoogle;
+    EditText etLoginEmail, etLoginPassword;
     Button btnLogin;
 
-    String username, password;
+    //Firebase authentication object
+    FirebaseAuth mAuth;
 
-    //string for extracting data from JSON array answer from server
-    private static final String JSON_ARRAY ="result";
-    private static final String JSON_USERNAME = "username";
-    private static final String JSON_FIRSTNAME= "firstname";
-    private static final String JSON_SECONDNAME = "secondname";
+    ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Firebase elements declaration
+        mAuth = FirebaseAuth.getInstance();
+        mProgress = new ProgressDialog(this);
+
         //attaching layout elements to variables
         imgLoginFacebook = (ImageView) findViewById(R.id.imgLoginFacebook);
         imgLoginTwitter = (ImageView) findViewById(R.id.imgLoginTwitter);
-        imgLoginSnapchat = (ImageView) findViewById(R.id.imgLoginSnapchat);
-        etLoginUsername = (EditText) findViewById(R.id.etLoginUsername);
+        imgLoginGoogle = (ImageView) findViewById(R.id.imgLoginGoogle);
+        etLoginEmail = (EditText) findViewById(R.id.etLoginEmail);
         etLoginPassword = (EditText) findViewById(R.id.etLoginPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         //attaching images to imageViews and applying listeners to them
         imgLoginFacebook.setImageResource(R.drawable.img_facebook);
         imgLoginTwitter.setImageResource(R.drawable.img_twitter);
-        imgLoginSnapchat.setImageResource(R.drawable.img_snapchat);
+        imgLoginGoogle.setImageResource(R.drawable.img_google);
         imgLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
             }
         });
-        imgLoginSnapchat.setOnClickListener(new View.OnClickListener() {
+        imgLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
@@ -72,44 +75,38 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = etLoginUsername.getText().toString();
-                password = etLoginPassword.getText().toString();
-
-                if (!username.equals("") && !password.equals("")) {
-                    LoginHelper loginHelper = new LoginHelper(LoginActivity.this, LoginActivity.this);
-                    loginHelper.execute(username, password);
-
-                } else {
-                    Toast.makeText(LoginActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
-                }
+               emailLogin();
             }
         });
-
     }
 
-    //if log in was successful - parse user data from server response,
-    //save it to sharedPreferences and open MainActivity
-    public void loginPostExecute(){
-        try {
-            JSONObject jsonResult = new JSONObject(LoginHelper.jsonResult);
-            JSONArray userinfo = jsonResult.getJSONArray(JSON_ARRAY);
-            JSONObject jsonObject = userinfo.getJSONObject(0);
+    //method to sign in with email:password
+    private void emailLogin(){
 
-            SharedPreferences sPref = getSharedPreferences("session", MODE_PRIVATE);
-            SharedPreferences.Editor ed = sPref.edit();
-            ed.putString("username", jsonObject.getString(JSON_USERNAME));
-            ed.putString("firstname", jsonObject.getString(JSON_FIRSTNAME));
-            ed.putString("secondname", jsonObject.getString(JSON_SECONDNAME));
-            ed.commit();
+        String email = etLoginEmail.getText().toString();
+        String password = etLoginPassword.getText().toString();
 
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(LoginActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+        } else {
+            mProgress.setMessage("Please wait...");
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        mProgress.dismiss();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
-
 }

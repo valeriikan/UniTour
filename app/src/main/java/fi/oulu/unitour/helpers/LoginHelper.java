@@ -87,7 +87,7 @@ public class LoginHelper extends AsyncTask<String,Void,String> {
             Toast.makeText(context, jsonResult, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show();
-            source.loginPostExecute();
+         //   source.loginPostExecute();
         }
     }
 

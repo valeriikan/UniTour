@@ -92,7 +92,7 @@ public class SignupHelper extends AsyncTask<String,Void,String> {
         loading.dismiss();
         Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         if (result.equals("Registration successful")) {
-            source.signupPostExecute();
+           // source.signupPostExecute();
         }
     }
 
