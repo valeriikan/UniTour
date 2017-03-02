@@ -17,6 +17,11 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
+
+//Do we need this class? It is created, but not called anywhere?
+//What the purpose of it
+//Valerii 02.03.17
+
 public class RequestHandler {
 
     public String sendGetRequest(String uri) {

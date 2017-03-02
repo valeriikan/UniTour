@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/location_descriptor"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    tools:context="fi.oulu.unitour.activities.LocationDescriptor">
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/locImageIV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:scrollbarStyle="insideOverlay"
-        android:fillViewport="false">
+        android:layout_height="200dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:id="@+id/locImageIV"
-                android:layout_height="wrap_content"
-                android:cropToPadding="false"
-                android:adjustViewBounds="true" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/locDescripTxt" />
+    <TextView
+        android:id="@+id/locDescripTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/locImageIV"/>
 
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</RelativeLayout>
