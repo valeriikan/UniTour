@@ -40,7 +40,7 @@
             android:layout_marginRight="30dp"/>
 
         <ImageView
-            android:id="@+id/imgLoginSnapchat"
+            android:id="@+id/imgLoginGoogle"
             android:layout_width="60dp"
             android:layout_height="60dp" />
 
@@ -56,21 +56,21 @@
         android:text="or with UniTour application account"/>
 
     <EditText
-        android:id="@+id/etLoginUsername"
+        android:id="@+id/etLoginEmail"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvLoginUnitour"
         android:layout_marginTop="15dp"
         android:textAlignment="center"
-        android:hint="Username"/>
+        android:hint="Email"/>
 
     <EditText
         android:id="@+id/etLoginPassword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/etLoginUsername"
+        android:layout_below="@id/etLoginEmail"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:hint="Password"/>
