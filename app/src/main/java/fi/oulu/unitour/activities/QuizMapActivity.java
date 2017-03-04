@@ -79,6 +79,7 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
         //adds markers to map to show the quiz points
         QuestPointMaker questMaker = new QuestPointMaker();
         uniCheckpoints = questMaker.addCheckpoints(gameMap);
+        //questMaker.makeRoute(gameMap);
 
         //Adding ground overlay to google map on university of Oulu LatLng
         GroundOverlayOptions overlayOptions = new GroundOverlayOptions()

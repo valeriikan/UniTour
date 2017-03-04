@@ -1,5 +1,6 @@
 package fi.oulu.unitour.helpers;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -8,6 +9,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -42,6 +45,8 @@ public class QuestPointMaker {
     private static final LatLng BALANCE = new LatLng(65.061110, 25.468036);
     private static final LatLng FACULTYOFEDUCATION = new LatLng(65.061215, 25.468864);
 
+    //private static final Polyline gameRoute;
+
 
     private static final LatLng[] checkpoints = {KASTARI,TIETOTALO,DATAGARAGE,VENDORMACHINE,AIESEC,ITSERVICES,TELLUS,FABLAB,WALLINFRONTOFL2,
             CENTRALSTATION,STUDENTCENTER,AVA,ZOOLOGICALMUSEUM,PEGASUSLIBRARY,BALANCE,FACULTYOFEDUCATION};
@@ -72,5 +77,17 @@ public class QuestPointMaker {
             uniMarkers[i] = addMarker(map,ltlg,ltlg.toString(),id, unfinishedCheckpoint);
         }
         return uniMarkers;
+    }
+
+    public void makeRoute(GoogleMap map)
+    {
+        int i = 0;
+        while (i<=LOCATION_NUMBERS-2)
+        {
+            LatLng src = checkpoints[i];
+            LatLng dest = checkpoints[i+1];
+            map.addPolyline(new PolylineOptions().add(src,dest).width(10).color(Color.BLACK).geodesic(true));
+            i=i+1;
+        }
     }
 }
