@@ -10,21 +10,21 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".helpers.UniTourApp">
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.WelcomeActivity">
+        <activity android:name=".activities.WelcomeActivity" />
+        <activity android:name=".activities.SignupActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignupActivity" />
-        <activity android:name=".activities.MainActivity"></activity>
-        <activity android:name=".activities.MapActivity" android:label="Campus Map"/>
+        <activity android:name=".activities.CampusMapActivity" android:label="Campus Map"/>
         <activity android:name=".activities.LocationDescriptor" />
-        <activity android:name=".helpers.ShowImage" />
-
+        <activity android:name=".activities.QuizMapActivity" android:label="Quests"/>
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c"/>
     </application>

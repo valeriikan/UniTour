@@ -9,7 +9,7 @@
     android:layout_height="459dp"
     android:id="@+id/mapFragment"
     class="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_weight="6.75" />
+    android:layout_weight="0.38" />
 
     <Button
         android:text="Start Quest"

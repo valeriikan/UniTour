@@ -1,7 +1,7 @@
 package fi.oulu.unitour.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,45 +11,89 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 import fi.oulu.unitour.R;
 
-import static android.R.attr.fingerprintAuthDrawable;
-import static android.R.attr.onClick;
-import static android.content.Context.MODE_PRIVATE;
-
 public class MainActivity extends AppCompatActivity {
+
+    //declaration of variables for layout elements
+    TextView tvMainName;
+    Button startTour;
+
+    //Firebase authentication objects
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sPref = getSharedPreferences("session", MODE_PRIVATE);
-        String usernamePref = sPref.getString("username", "");
-        String firstnamePref = sPref.getString("firstname", "");
-        String secondnamePref = sPref.getString("secondname", "");
+        //attaching layout elements to variables
+        tvMainName = (TextView) findViewById(R.id.tvMainName);
+        startTour = (Button) findViewById(R.id.startTourBtn);
 
-        TextView tvMainName = (TextView) findViewById(R.id.tvMainName);
-        tvMainName.setText(firstnamePref + " " + secondnamePref);
+        mAuth = FirebaseAuth.getInstance();
 
-        Button startTour = (Button) findViewById(R.id.startTourBtn);
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() == null) {
+                    //open WelcomeActivity if the user is not signed in
+                    Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else {
+                    //set user data if the user is signed in
+                    String userId = mAuth.getCurrentUser().getUid();
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+                    mDatabase.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Map<String, String> map = (Map) dataSnapshot.getValue();
+                            String firstname = map.get("firstname");
+                            String secondname = map.get("secondname");
+                            tvMainName.setText(firstname + " " + secondname);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        };
+
+        //attaching listener to startTour button
         startTour.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View view) {
-                                             Intent mapIntent = new Intent(getApplicationContext(),MapActivity.class);
+                                             Intent mapIntent = new Intent(getApplicationContext(),CampusMapActivity.class);
                                              startActivity(mapIntent);
                                          }
                                      }
         );
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // inflate the menu; adds items to the action bar
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -61,17 +105,8 @@ public class MainActivity extends AppCompatActivity {
         // menu items
         switch (id) {
             case R.id.action_logout:
-                // clear sPref data, open WelcomeActivity
-                SharedPreferences sPref = getSharedPreferences("session", MODE_PRIVATE);
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putString("username", "");
-                ed.putString("firstname", "");
-                ed.putString("secondname", "");
-                ed.commit();
-
-                Intent intent = new Intent(this, WelcomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                // sign out
+                mAuth.signOut();
                 Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
                 break;
 

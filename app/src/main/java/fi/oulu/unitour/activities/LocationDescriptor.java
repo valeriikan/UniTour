@@ -6,81 +6,55 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.Map;
 
 import fi.oulu.unitour.R;
-import fi.oulu.unitour.helpers.GetLocationInfo;
-
-
-/**
- * Created by Majid on 2/13/2017.
- */
 
 public class LocationDescriptor extends AppCompatActivity{
+
+    //declaration of variables for layout elements
+    TextView locDescripTxt;
+    ImageView locImageIV;
+
+    //Firebase authentication objects
+    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_descriptor);
-        Firebase
-        GetLocationInfo showImage = new GetLocationInfo(this, this);
-        showImage.execute(getIntent().getStringExtra("LOCATION_ID"));
 
-    }
-    public void fetchInfoPostExecute(){
-        //fetches location name and description form result set thrown by php script
-        TextView locDescTV = (TextView) findViewById(R.id.locDescripTxt);
-        ImageView locIV = (ImageView) findViewById(R.id.locImageIV);
+        //attaching layout elements to variables
+        locDescripTxt = (TextView) findViewById(R.id.locDescripTxt);
+        locImageIV = (ImageView) findViewById(R.id.locImageIV);
 
-        try
-        {
-            JSONObject jsonResult = new JSONObject(GetLocationInfo.jsonResult);
-            JSONArray locationInfo = jsonResult.getJSONArray("result");
-            JSONObject jsonObject = locationInfo.getJSONObject(0);
-            setTitle(jsonObject.getString("name"));
-            locDescTV.setText(jsonObject.getString("description"));
-            locIV.setImageBitmap(GetLocationInfo.image);
-            /*switch (jsonObject.getString("name"))
-            {
-                case "Kastari": locIV.setImageResource(R.drawable.kastari);
-                break;
-                case "Data Garage": locIV.setImageResource(R.drawable.kastari);
-                    break;
-                case "ITEE": locIV.setImageResource(R.drawable.itee);
-                    break;
-                case "Stories": locIV.setImageResource(R.drawable.stories);
-                    break;
-                case "Tellus": locIV.setImageResource(R.drawable.tellus);
-                    break;
-                case "Fablab": locIV.setImageResource(R.drawable.fablab);
-                    break;
-                case "OYY": locIV.setImageResource(R.drawable.oyy);
-                    break;
-                case "Central Station": locIV.setImageResource(R.drawable.centralstation);
-                    break;
-                case "Student Center": locIV.setImageResource(R.drawable.studentcenter);
-                    break;
-                case "Ava": locIV.setImageResource(R.drawable.aava);
-                    break;
-                case "Zoological Museum": locIV.setImageResource(R.drawable.zoologicalmuseum);
-                    break;
-                case "Balance": locIV.setImageResource(R.drawable.balance);
-                    break;
-                case "Pegasus Library": locIV.setImageResource(R.drawable.pegasuslibrary);
-                    break;
-                default:
-                    break;
+        //retrieving place data from Firebase database
+        String placeId = getIntent().getStringExtra("LOCATION_ID");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("locations").child(placeId);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, String> map = (Map) dataSnapshot.getValue();
+                String name = map.get("name");
+                String description = map.get("description");
+                String imageUrl = map.get("imageUrl");
+                setTitle(name);
+                locDescripTxt.setText(description);
+                Picasso.with(LocationDescriptor.this).load(imageUrl).fit().centerCrop().into(locImageIV);
             }
-            */
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
