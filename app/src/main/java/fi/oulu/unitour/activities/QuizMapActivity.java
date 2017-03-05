@@ -103,9 +103,9 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public boolean onMarkerClick(final Marker marker)
     {
-        Intent showLocInfo = new Intent(this,LocationDescriptor.class);
-        showLocInfo.putExtra("LOCATION_ID",marker.getSnippet());
-        startActivity(showLocInfo);
+        Intent quest = new Intent(this,QuestActivity.class);
+        quest.putExtra("LOCATION_ID",marker.getSnippet());
+        startActivity(quest);
         return true;
     }
     @Override
