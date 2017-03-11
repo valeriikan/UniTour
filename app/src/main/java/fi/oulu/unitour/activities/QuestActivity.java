@@ -2,6 +2,8 @@ package fi.oulu.unitour.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,9 +29,14 @@ public class QuestActivity extends AppCompatActivity {
         switch (placeID)
         {
             case "1":
-                        questImage.setImageResource(R.drawable.kastari_art);
+                questImage.setImageResource(R.drawable.kastari_art);
                         questText.setText("Go and find the angle shown in the picture and scan the QR code near there. " +
                                 "Then you will find a clue to the next location");
+                /*Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
+                questText.startAnimation(anim);
+                Animation anim1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clockwise);
+                questImage.startAnimation(anim1);
+                */
                 break;
             case "2":
                         questImage.setImageResource(R.drawable.datagarage);

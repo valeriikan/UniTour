@@ -63,8 +63,6 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
         mapFragment.getMapAsync(this);
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -88,7 +86,7 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
         GroundOverlay uniOverlay = gameMap.addGroundOverlay(overlayOptions);
         uniOverlay.setClickable(true);
 
-        gameMap.animateCamera(CameraUpdateFactory.newCameraPosition(uniOulu));
+        gameMap.moveCamera(CameraUpdateFactory.newCameraPosition(uniOulu));
 
         //if the user grants the application his location access, the maps automatically adds user's location on the top right position
         //of the map and user can clicks on it and see his current location, otherwise no
