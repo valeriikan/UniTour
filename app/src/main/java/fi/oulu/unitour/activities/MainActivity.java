@@ -2,6 +2,7 @@ package fi.oulu.unitour.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MultiDex.install(this);
 
         //attaching layout elements to variables
         tvMainName = (TextView) findViewById(R.id.tvMainName);
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         startTour.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View view) {
-                                             Intent mapIntent = new Intent(getApplicationContext(),MapActivity.class);
+                                             Intent mapIntent = new Intent(getApplicationContext(),CampusMapActivity.class);
                                              startActivity(mapIntent);
                                          }
                                      }

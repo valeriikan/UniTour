@@ -1,6 +1,7 @@
 package fi.oulu.unitour.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -8,7 +9,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,18 +25,18 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.GoogleMap.OnGroundOverlayClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.GoogleMap.OnGroundOverlayClickListener;
 
 import fi.oulu.unitour.R;
-import fi.oulu.unitour.helpers.CheckPointMaker;
-
+import fi.oulu.unitour.helpers.MapLocationMaker;
+import fi.oulu.unitour.helpers.QuestPointMaker;
 
 /**
- * Created by Majid on 2/11/2017.
+ * Created by Majid on 3/4/2017.
  */
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, OnMarkerClickListener, OnGroundOverlayClickListener {
+public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCallback, OnMarkerClickListener, OnGroundOverlayClickListener {
 
     //the boundary of uni map to make ground overlay
     private LatLngBounds uniBound = new LatLngBounds(
@@ -42,9 +46,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //default position of university of Oulu on Google map
     private static final CameraPosition uniOulu =
             new CameraPosition.Builder().target(new LatLng(65.0593, 25.4663))
-                    .zoom(15.0f)
+                    .zoom(16.0f)
                     .bearing(0)
-                    .tilt(30)
+                    .tilt(0)
                     .build();
     private Marker[] uniCheckpoints = new Marker[13];
 
@@ -53,41 +57,42 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.campus_map);
+        setContentView(R.layout.quiz_map);
 
-        //defines a map fragment and links it with the fragment on campus map layout and sets the callback on this object
+        //defines a map fragment and links it with the fragment on quiz map layout and sets the callback on this object
         SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
         mapFragment.getMapAsync(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onMapReady(GoogleMap campusMap) {
+    public void onMapReady(GoogleMap gameMap) {
 
         //goes to Linnanmaa campus location by an animation and sets a marker on it named Linnanmaa campus
-        campusMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        campusMap.setIndoorEnabled(true);
-        campusMap.setOnMarkerClickListener(this);
+        gameMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        gameMap.setIndoorEnabled(false);
+        gameMap.setOnMarkerClickListener(this);
 
-        //adds markers to map to show the checkpoints meaning different locations and levels
-        CheckPointMaker uniCheckpointMaker = new CheckPointMaker();
-        uniCheckpoints = uniCheckpointMaker.addCheckpoints(campusMap);
+        //adds markers to map to show the quiz points
+        QuestPointMaker questMaker = new QuestPointMaker();
+        uniCheckpoints = questMaker.addCheckpoints(gameMap);
+        //questMaker.makeRoute(gameMap);
+
         //Adding ground overlay to google map on university of Oulu LatLng
-        //LatLng uniCentre = new LatLng(65.0593, 25.4663);
         GroundOverlayOptions overlayOptions = new GroundOverlayOptions()
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.map))
                 .positionFromBounds(uniBound);
-        GroundOverlay uniOverlay = campusMap.addGroundOverlay(overlayOptions);
+        GroundOverlay uniOverlay = gameMap.addGroundOverlay(overlayOptions);
         uniOverlay.setClickable(true);
 
-        campusMap.animateCamera(CameraUpdateFactory.newCameraPosition(uniOulu));
+        gameMap.moveCamera(CameraUpdateFactory.newCameraPosition(uniOulu));
 
         //if the user grants the application his location access, the maps automatically adds user's location on the top right position
         //of the map and user can clicks on it and see his current location, otherwise no
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            campusMap.setMyLocationEnabled(true);
+            gameMap.setMyLocationEnabled(true);
         } else {
             this.requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},0);
             //Toast.makeText(this,"No permission granted to access your location! you can give the permission in your phone setting",Toast.LENGTH_LONG);
@@ -96,9 +101,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(final Marker marker)
     {
-        Intent showLocInfo = new Intent(this,LocationDescriptor.class);
-        showLocInfo.putExtra("LOCATION_ID",marker.getSnippet());
-        startActivity(showLocInfo);
+        Intent quest = new Intent(this,QuestActivity.class);
+        quest.putExtra("LOCATION_ID",marker.getSnippet());
+        startActivity(quest);
         return true;
     }
     @Override

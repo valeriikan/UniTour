@@ -22,9 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MapActivity" android:label="Campus Map"/>
+        <activity android:name=".activities.CampusMapActivity" android:label="Campus Map"/>
         <activity android:name=".activities.LocationDescriptor" />
-        <activity android:name=".helpers.ShowImage" />
+        <activity android:name=".activities.QuizMapActivity" android:label="Quests"/>
+        <activity android:name=".activities.QuestActivity" />
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c"/>
