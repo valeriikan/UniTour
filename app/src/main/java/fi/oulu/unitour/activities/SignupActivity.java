@@ -55,9 +55,9 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btnSignup);
 
         //attaching images to imageViews and applying listeners to them
-        imgSignupFacebook.setImageResource(R.drawable.img_facebook);
-        imgSignupTwitter.setImageResource(R.drawable.img_twitter);
-        imgSignupGoogle.setImageResource(R.drawable.img_google);
+        imgSignupFacebook.setImageResource(R.drawable.img_facebook2);
+        imgSignupTwitter.setImageResource(R.drawable.img_twitter2);
+        imgSignupGoogle.setImageResource(R.drawable.img_google2);
         imgSignupFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     //declaration of variables for layout elements
     TextView tvMainName;
     Button startTour;
+    ImageView mainUserpic;
 
     //Firebase authentication objects
     FirebaseAuth mAuth;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         //attaching layout elements to variables
         tvMainName = (TextView) findViewById(R.id.tvMainName);
         startTour = (Button) findViewById(R.id.startTourBtn);
+        mainUserpic = (ImageView) findViewById(R.id.mainUserpic);
+        mainUserpic.setImageResource(R.drawable.ic_applogo2);
 
         mAuth = FirebaseAuth.getInstance();
 
