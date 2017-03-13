@@ -10,13 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fi.oulu.unitour.activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/mainUserpic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"/>
+
     <LinearLayout
         android:id="@+id/layoutMainWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="100dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/mainUserpic"
+
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -30,27 +38,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Name Surname"/>
+            android:text="New student"/>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvTimeTo"
+        android:id="@+id/tvCheckpoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/layoutMainWelcome"
         android:layout_marginTop="30dp"
         android:textSize="20sp"
-        android:text="It's time to discover!"/>
+        android:text="You completed 0 checkpoints"/>
+
+    <TextView
+        android:id="@+id/tvUnitourScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvCheckpoints"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:text="UniTour score: 0 points"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/startTourBtn"
         android:text="Start University Tour"
-        android:layout_below="@+id/tvTimeTo"
+        android:layout_below="@+id/tvUnitourScore"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp" />
+        android:layout_marginTop="79dp"
+        android:background="@drawable/buttons"
+        android:textColor="#000000"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutMainWelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
 
 </RelativeLayout>

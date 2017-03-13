@@ -18,14 +18,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        //attaching images to imageViews
-        ImageView imgLogoRays = (ImageView) findViewById(R.id.imgLogoRays);
-        ImageView imgLogoTower = (ImageView) findViewById(R.id.imgLogoTower);
-        ImageView imgUnitour = (ImageView) findViewById(R.id.imgUnitour);
-        imgLogoRays.setImageResource(R.drawable.img_logorays);
-        imgLogoTower.setImageResource(R.drawable.img_logotower);
-        imgUnitour.setImageResource(R.drawable.img_unitour);
-
         //attaching buttons and its listeners
         Button btnWelcomeSignup = (Button) findViewById(R.id.btnWelcomeSignup);
         Button btnWelcomeLogin = (Button) findViewById(R.id.btnWelcomeLogin);

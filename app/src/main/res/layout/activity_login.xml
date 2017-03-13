@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/ic_login_launcher"
     tools:context="fi.oulu.unitour.activities.LoginActivity">
 
     <TextView
@@ -15,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="65dp"
+        android:textColor="#000000"
         android:text="You can sign in with your own accounts"/>
 
     <LinearLayout
@@ -29,20 +31,20 @@
 
         <ImageView
             android:id="@+id/imgLoginFacebook"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
 
         <ImageView
             android:id="@+id/imgLoginTwitter"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
 
         <ImageView
             android:id="@+id/imgLoginGoogle"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
 
     </LinearLayout>
 
@@ -52,36 +54,44 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/layoutLoginSocial"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="130dp"
+        android:textColor="#000000"
         android:text="or with UniTour application account"/>
 
     <EditText
         android:id="@+id/etLoginEmail"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvLoginUnitour"
         android:layout_marginTop="15dp"
         android:textAlignment="center"
+        android:background="@drawable/etfields"
+        android:padding="10dp"
         android:hint="Email"/>
 
     <EditText
         android:id="@+id/etLoginPassword"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/etLoginEmail"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:background="@drawable/etfields"
+        android:layout_marginTop="6dp"
+        android:padding="10dp"
         android:hint="Password"/>
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="140dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/etLoginPassword"
         android:layout_marginTop="15dp"
+        android:background="@drawable/buttons"
+        android:textColor="#000000"
         android:text="Sign in"/>
 
 </RelativeLayout>

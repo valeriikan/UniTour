@@ -49,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         //attaching images to imageViews and applying listeners to them
-        imgLoginFacebook.setImageResource(R.drawable.img_facebook);
-        imgLoginTwitter.setImageResource(R.drawable.img_twitter);
-        imgLoginGoogle.setImageResource(R.drawable.img_google);
+        imgLoginFacebook.setImageResource(R.drawable.img_facebook2);
+        imgLoginTwitter.setImageResource(R.drawable.img_twitter2);
+        imgLoginGoogle.setImageResource(R.drawable.img_google2);
         imgLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
