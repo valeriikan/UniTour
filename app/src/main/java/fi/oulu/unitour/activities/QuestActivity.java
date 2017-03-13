@@ -1,11 +1,15 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fi.oulu.unitour.R;
 
@@ -17,6 +21,9 @@ public class QuestActivity extends AppCompatActivity {
     private static String placeID;
     private static ImageView questImage;
     private static TextView questText;
+
+    Button ScanQRBtn;
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -25,6 +32,16 @@ public class QuestActivity extends AppCompatActivity {
         placeID = getIntent().getStringExtra("LOCATION_ID");
         questImage = (ImageView) findViewById(R.id.questPicIV);
         questText = (TextView) findViewById(R.id.questTV);
+        ScanQRBtn = (Button) findViewById(R.id.scanQRBtn);
+
+        ScanQRBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QuestActivity.this, QrScannerActivity.class);
+                startActivity(intent);
+            }
+        });
+
         setTitle("Finding Locations");
         switch (placeID)
         {
