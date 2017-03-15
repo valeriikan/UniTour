@@ -30,7 +30,7 @@ public class RightAnswerActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.right_answer);
-        question.setText("questionString");
+        question.setText(questionString);
 
         answer1.setOnClickListener(this);
         answer2.setOnClickListener(this);
