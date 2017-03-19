@@ -19,15 +19,9 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         //attaching buttons and its listeners
-        Button btnWelcomeSignup = (Button) findViewById(R.id.btnWelcomeSignup);
         Button btnWelcomeLogin = (Button) findViewById(R.id.btnWelcomeLogin);
-        btnWelcomeSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentSignup = new Intent(WelcomeActivity.this, SignupActivity.class);
-                startActivity(intentSignup);
-            }
-        });
+        Button btnWelcomeExplore = (Button) findViewById(R.id.btnWelcomeExplore);
+
         btnWelcomeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +33,8 @@ public class WelcomeActivity extends AppCompatActivity {
         // welcome info dialog
         AlertDialog welcomeDialog = new AlertDialog.Builder(this).create();
         welcomeDialog.setTitle("Welcome");
-        welcomeDialog.setMessage("This application is created to help you to get acquainted with the University of Oulu. Register firstly and discover!");
+        welcomeDialog.setMessage("This application is created to help you to get acquainted with the University of Oulu. " +
+                "Sign up to play a QR quest or just explore the university map without any registration");
         welcomeDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Got it", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

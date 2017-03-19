@@ -12,84 +12,190 @@
     tools:context="fi.oulu.unitour.activities.LoginActivity">
 
     <TextView
-        android:id="@+id/tvLoginSocial"
+        android:id="@+id/tvSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="55dp"
         android:textColor="#000000"
-        android:text="You can sign in with your own accounts"/>
+        android:text="You can sign up with your own accounts"/>
 
     <LinearLayout
-        android:id="@+id/layoutLoginSocial"
+        android:id="@+id/layoutSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvLoginSocial"
+        android:layout_below="@+id/tvSocial"
         android:layout_marginTop="7dp">
 
         <ImageView
-            android:id="@+id/imgLoginFacebook"
+            android:id="@+id/imgFacebook"
             android:layout_width="70dp"
             android:layout_height="70dp" />
 
         <ImageView
-            android:id="@+id/imgLoginTwitter"
+            android:id="@+id/imgTwitter"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
 
         <ImageView
-            android:id="@+id/imgLoginGoogle"
+            android:id="@+id/imgGoogle"
             android:layout_width="70dp"
             android:layout_height="70dp" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvLoginUnitour"
+    <LinearLayout
+        android:id="@+id/layoutUnitour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/layoutSignup"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvUnitour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:text="or with UniTour application account"/>
+
+        <LinearLayout
+            android:id="@+id/layoutSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <Switch
+                android:id="@+id/switchLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+
+            <TextView
+                android:id="@+id/tvSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:textColor="#000000"
+                android:text="I don't have UniTour account"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/layoutLoginSocial"
-        android:layout_marginTop="130dp"
+        android:layout_above="@+id/btnSignup"
+        android:layout_marginBottom="15dp">
+
+        <EditText
+            android:id="@+id/etSignupEmail"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="Email"/>
+
+        <EditText
+            android:id="@+id/etSignupPassword"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="Password"/>
+
+        <EditText
+            android:id="@+id/etSignupFirstname"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="First name"/>
+
+        <EditText
+            android:id="@+id/etSignupSecondname"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="Second name"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLogin"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btnSignup"
+        android:layout_marginBottom="15dp">
+
+        <EditText
+            android:id="@+id/etLoginEmail"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="Email"/>
+
+        <EditText
+            android:id="@+id/etLoginPassword"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:background="@drawable/etfields"
+            android:padding="10dp"
+            android:hint="Password"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/buttons"
         android:textColor="#000000"
-        android:text="or with UniTour application account"/>
-
-    <EditText
-        android:id="@+id/etLoginEmail"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvLoginUnitour"
-        android:layout_marginTop="15dp"
-        android:textAlignment="center"
-        android:background="@drawable/etfields"
-        android:padding="10dp"
-        android:hint="Email"/>
-
-    <EditText
-        android:id="@+id/etLoginPassword"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/etLoginEmail"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:background="@drawable/etfields"
-        android:layout_marginTop="6dp"
-        android:padding="10dp"
-        android:hint="Password"/>
+        android:text="Sign up"/>
 
     <Button
         android:id="@+id/btnLogin"
+        android:visibility="invisible"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/etLoginPassword"
-        android:layout_marginTop="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
         android:background="@drawable/buttons"
         android:textColor="#000000"
         android:text="Sign in"/>

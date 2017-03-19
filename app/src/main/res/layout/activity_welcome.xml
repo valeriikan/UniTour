@@ -12,17 +12,17 @@
     tools:context="fi.oulu.unitour.activities.WelcomeActivity">
 
     <Button
-        android:id="@+id/btnWelcomeSignup"
+        android:id="@+id/btnWelcomeLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnWelcomeLogin"
+        android:layout_above="@+id/btnWelcomeExplore"
         android:layout_marginTop="65dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttons"
         android:text="Sign up"/>
 
     <Button
-        android:id="@+id/btnWelcomeLogin"
+        android:id="@+id/btnWelcomeExplore"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,6 +30,6 @@
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttons"
-        android:text="Sign in"/>
+        android:text="Explore"/>
 
 </RelativeLayout>

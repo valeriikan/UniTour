@@ -8,9 +8,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -33,16 +39,17 @@ import fi.oulu.unitour.R;
 public class LoginActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    ImageView imgLoginFacebook, imgLoginTwitter, imgLoginGoogle;
-    EditText etLoginEmail, etLoginPassword;
-    Button btnLogin;
+    ImageView imgFacebook, imgTwitter, imgGoogle;
+    TextView tvSwitch, tvSocial;
+    Switch switchLogin;
+    EditText etLoginEmail, etLoginPassword, etSignupEmail, etSignupPassword, etSignupFirstname, etSignupSecondname;
+    Button btnLogin, btnSignup;
+    LinearLayout layoutLogin, layoutSignup, layoutUnitour;
+    ProgressDialog mProgress;
 
     //Firebase authentication object
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
-   // FirebaseAuth.AuthStateListener mAuthListener;
-
-    ProgressDialog mProgress;
 
     GoogleApiClient mGoogleApiClient;
 
@@ -56,46 +63,87 @@ public class LoginActivity extends AppCompatActivity {
         //Firebase elements declaration
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        /*mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null) {
-                    mProgress.dismiss();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
-            }
-        };*/
 
         //attaching layout elements to variables
-        imgLoginFacebook = (ImageView) findViewById(R.id.imgLoginFacebook);
-        imgLoginTwitter = (ImageView) findViewById(R.id.imgLoginTwitter);
-        imgLoginGoogle = (ImageView) findViewById(R.id.imgLoginGoogle);
+        imgFacebook = (ImageView) findViewById(R.id.imgFacebook);
+        imgTwitter = (ImageView) findViewById(R.id.imgTwitter);
+        imgGoogle = (ImageView) findViewById(R.id.imgGoogle);
+        tvSocial = (TextView) findViewById(R.id.tvSocial);
+        tvSwitch = (TextView) findViewById(R.id.tvSwitch);
+        switchLogin = (Switch) findViewById(R.id.switchLogin);
         etLoginEmail = (EditText) findViewById(R.id.etLoginEmail);
         etLoginPassword = (EditText) findViewById(R.id.etLoginPassword);
+        etSignupEmail = (EditText) findViewById(R.id.etSignupEmail);
+        etSignupPassword = (EditText) findViewById(R.id.etSignupPassword);
+        etSignupFirstname = (EditText) findViewById(R.id.etSignupFirstname);
+        etSignupSecondname = (EditText) findViewById(R.id.etSignupSecondname);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnSignup = (Button) findViewById(R.id.btnSignup);
+        layoutLogin = (LinearLayout) findViewById(R.id.layoutLogin);
+        layoutSignup = (LinearLayout) findViewById(R.id.layoutSignup);
+        layoutUnitour = (LinearLayout) findViewById(R.id.layoutUnitour);
         mProgress = new ProgressDialog(this);
 
         //attaching images to imageViews and applying listeners to them
-        imgLoginFacebook.setImageResource(R.drawable.img_facebook2);
-        imgLoginTwitter.setImageResource(R.drawable.img_twitter2);
-        imgLoginGoogle.setImageResource(R.drawable.img_google2);
-        imgLoginFacebook.setOnClickListener(new View.OnClickListener() {
+        imgFacebook.setImageResource(R.drawable.img_facebook);
+        imgTwitter.setImageResource(R.drawable.img_twitter);
+        imgGoogle.setImageResource(R.drawable.img_google);
+        imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
             }
         });
-        imgLoginTwitter.setOnClickListener(new View.OnClickListener() {
+        imgTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
             }
         });
-        imgLoginGoogle.setOnClickListener(new View.OnClickListener() {
+        imgGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mProgress = ProgressDialog.show(LoginActivity.this, "Please wait...",null,true,true);
                 googleSignIn();
+            }
+        });
+
+        switchLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    tvSocial.setText("You can sign in with your own accounts");
+                    tvSwitch.setText("I have UniTour account");
+                    layoutSignup.setVisibility(View.INVISIBLE);
+                    btnSignup.setVisibility(View.INVISIBLE);
+                    layoutLogin.setVisibility(View.VISIBLE);
+                    btnLogin.setVisibility(View.VISIBLE);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.ABOVE, R.id.layoutLogin);
+                    layoutUnitour.setLayoutParams(params);
+
+                } else {
+                    tvSocial.setText("You can sign up with your own accounts");
+                    tvSwitch.setText("I don't have UniTour account");
+                    layoutLogin.setVisibility(View.INVISIBLE);
+                    btnLogin.setVisibility(View.INVISIBLE);
+                    layoutSignup.setVisibility(View.VISIBLE);
+                    btnSignup.setVisibility(View.VISIBLE);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.ABOVE, R.id.layoutSignup);
+                    layoutUnitour.setLayoutParams(params);
+                }
+            }
+        });
+
+        //attaching listener to LogIn button
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                emailSignup();
             }
         });
 
@@ -126,7 +174,44 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //method to sign in with email:password
+    //method to SIGN UP with email:password
+    private void emailSignup() {
+
+        String email = etSignupEmail.getText().toString();
+        String password = etSignupPassword.getText().toString();
+        final String firstname = etSignupFirstname.getText().toString();
+        final String secondname = etSignupSecondname.getText().toString();
+
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(firstname) || TextUtils.isEmpty(secondname)) {
+            Toast.makeText(LoginActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
+
+        } else {
+            mProgress = ProgressDialog.show(LoginActivity.this, "Please wait...",null,true,true);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if(task.isSuccessful()) {
+                        String userId = mAuth.getCurrentUser().getUid();
+                        DatabaseReference currentUserDb = mDatabase.child(userId);
+                        currentUserDb.child("name").setValue(firstname + " " + secondname);
+
+                        Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        mProgress.dismiss();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Your email is already registered or your password is less than 6 symbols", Toast.LENGTH_SHORT).show();
+                        mProgress.dismiss();
+                    }
+                }
+            });
+        }
+    }
+
+    //method to LOG IN with email:password
     private void emailLogin(){
 
         String email = etLoginEmail.getText().toString();
@@ -136,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
 
         } else {
-            mProgress.setMessage("Please wait...");
+            mProgress = ProgressDialog.show(LoginActivity.this, "Please wait...",null,true,true);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

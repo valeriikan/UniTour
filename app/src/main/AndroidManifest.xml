@@ -15,7 +15,6 @@
         android:name=".helpers.UniTourApp">
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.WelcomeActivity" />
-        <activity android:name=".activities.SignupActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
