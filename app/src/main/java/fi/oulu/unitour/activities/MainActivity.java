@@ -67,9 +67,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Map<String, String> map = (Map) dataSnapshot.getValue();
-                            String firstname = map.get("firstname");
-                            String secondname = map.get("secondname");
-                            tvMainName.setText(firstname + " " + secondname);
+                            String name = map.get("name");
+                            tvMainName.setText(name);
                         }
 
                         @Override

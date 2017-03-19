@@ -106,8 +106,7 @@ public class SignupActivity extends AppCompatActivity {
                     if(task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid();
                         DatabaseReference currentUserDb = mDatabase.child(userId);
-                        currentUserDb.child("firstname").setValue(firstname);
-                        currentUserDb.child("secondname").setValue(secondname);
+                        currentUserDb.child("name").setValue(firstname + " " + secondname);
 
                         Toast.makeText(SignupActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
