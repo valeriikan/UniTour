@@ -13,18 +13,53 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/answer1"/>
+        android:id="@+id/answer1"
+        android:text="Button1"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/question" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/answer2"/>
+        android:id="@+id/answer2"
+        android:text="Button2"
+        android:layout_below="@+id/answer1"
+        android:layout_alignLeft="@+id/answer4"
+        android:layout_alignStart="@+id/answer4"
+        android:layout_marginTop="122dp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/answer3"/>
+        android:id="@+id/answer3"
+        android:text="Button3"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBaseline="@+id/answer2"
+        android:layout_alignBottom="@+id/answer2"
+        android:layout_alignLeft="@+id/answer1"
+        android:layout_alignStart="@+id/answer1" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/answer4"/>
+        android:id="@+id/answer4"
+        android:text="Button4"
+        android:layout_marginBottom="161dp"
+        android:layout_above="@+id/answer3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="46dp"
+        android:layout_marginEnd="46dp" />
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/question"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="0" />
 
 </RelativeLayout>

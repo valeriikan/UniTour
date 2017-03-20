@@ -8,15 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/question" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/points"/>
 
     <Button
-        android:text="Button"
+        android:text="True"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button_true" />
 
     <Button
-        android:text="Button"
+        android:text="False"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button_false" />

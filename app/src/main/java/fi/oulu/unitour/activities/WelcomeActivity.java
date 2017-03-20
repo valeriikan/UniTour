@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import fi.oulu.unitour.R;
 
 public class WelcomeActivity extends AppCompatActivity {
+    Button test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //attaching buttons and its listeners
         Button btnWelcomeSignup = (Button) findViewById(R.id.btnWelcomeSignup);
         Button btnWelcomeLogin = (Button) findViewById(R.id.btnWelcomeLogin);
+        test = (Button)findViewById(R.id.test);
         btnWelcomeSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +35,13 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentLogin = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intentLogin);
+            }
+        });
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+                    public void onClick(View v) {
+                Intent intentTest = new Intent(WelcomeActivity.this,Test.class);
+                startActivity(intentTest);
             }
         });
 

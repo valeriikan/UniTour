@@ -31,5 +31,14 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttons"
         android:text="Sign in"/>
+    <Button
+        android:id="@+id/test"
+        android:layout_height="wrap_content"
+        android:layout_width ="250dp"
+        android:background="@drawable/buttons"
+        android:text="Test"
+        android:layout_above="@+id/btnWelcomeSignup"
+        android:layout_alignLeft="@+id/btnWelcomeSignup"
+        android:layout_alignStart="@+id/btnWelcomeSignup" />
 
 </RelativeLayout>

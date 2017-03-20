@@ -14,29 +14,29 @@ import fi.oulu.unitour.R;
  */
 
 public class TrueFalseActivity extends Activity implements View.OnClickListener {
-    TextView question = (TextView) findViewById(R.id.question);
-    String questionString = "This is a sample Question?";
+    String questionString = "This is a sample Question? Answer is False";
+    TextView question;
+    TextView points;
     int answer = 0;
-    int press;
-    Button button_true = (Button) findViewById(R.id.button_true);
-    Button button_false = (Button) findViewById(R.id.button_false);
-
     Toast message;
+    int press;
+    int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_true_false);
+        question = (TextView) findViewById(R.id.question);
+        points=(TextView)findViewById(R.id.points);
         question.setText(questionString);
+        Button button_true = (Button) findViewById(R.id.button_true);
+        Button button_false = (Button) findViewById(R.id.button_false);
+
 
         button_true.setOnClickListener(this);
         button_false.setOnClickListener(this);
 
 
-        if (answer == press){
-            message = Toast.makeText(getApplicationContext(),"Get points",Toast.LENGTH_SHORT);
-            message.show();
-        }
 
     }
     public void onClick(View v) {
@@ -53,6 +53,12 @@ public class TrueFalseActivity extends Activity implements View.OnClickListener 
                 message = Toast.makeText(getApplicationContext(),"False",Toast.LENGTH_SHORT);
                 message.show();
                 break;
+        }
+        if (answer == press){
+            score++;
+            points.setText(Integer.toString(score));
+            message = Toast.makeText(getApplicationContext(),"Get points",Toast.LENGTH_SHORT);
+            message.show();
         }
 }
 }
