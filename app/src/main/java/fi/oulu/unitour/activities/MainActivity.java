@@ -27,14 +27,11 @@ import fi.oulu.unitour.R;
 public class MainActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    TextView tvMainName;
-    Button startTour;
-    ImageView mainUserpic;
+    ImageView imgProfile, imgTour, imgExplore;
 
     //Firebase authentication objects
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +39,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MultiDex.install(this);
 
-        //attaching layout elements to variables
-        tvMainName = (TextView) findViewById(R.id.tvMainName);
-        startTour = (Button) findViewById(R.id.startTourBtn);
-        mainUserpic = (ImageView) findViewById(R.id.mainUserpic);
-        mainUserpic.setImageResource(R.drawable.ic_applogo2);
-
+        //Firebase elements declaration
         mAuth = FirebaseAuth.getInstance();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -58,37 +49,40 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-
-                } else {
-                    //set user data if the user is signed in
-                    String userId = mAuth.getCurrentUser().getUid();
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
-                    mDatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Map<String, String> map = (Map) dataSnapshot.getValue();
-                            String name = map.get("name");
-                            tvMainName.setText(name);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
                 }
             }
         };
 
-        //attaching listener to startTour button
-        startTour.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View view) {
-                                             Intent mapIntent = new Intent(getApplicationContext(),CampusMapActivity.class);
-                                             startActivity(mapIntent);
-                                         }
-                                     }
-        );
+        //attaching layout elements to variables
+        imgProfile = (ImageView) findViewById(R.id.imgProfile);
+        imgTour = (ImageView) findViewById(R.id.imgTour);
+        imgExplore = (ImageView) findViewById(R.id.imgExplore);
+
+        //attaching images to imageViews and applying listeners to them
+        imgProfile.setImageResource(R.drawable.img_userprofile);
+        imgTour.setImageResource(R.drawable.img_tour);
+        imgExplore.setImageResource(R.drawable.img_explore);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,QuizMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgExplore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,CampusMapActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -122,5 +116,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

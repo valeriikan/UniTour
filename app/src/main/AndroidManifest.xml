@@ -6,13 +6,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
+        android:name=".helpers.UniTourApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".helpers.UniTourApp">
+        android:theme="@style/AppTheme">
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.WelcomeActivity" />
         <activity android:name=".activities.MainActivity">
@@ -22,14 +23,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CampusMapActivity" android:label="Campus Map"/>
+        <activity
+            android:name=".activities.CampusMapActivity"
+            android:label="Campus Map" />
         <activity android:name=".activities.LocationDescriptor" />
-        <activity android:name=".activities.QuizMapActivity" android:label="Quests"/>
+        <activity
+            android:name=".activities.QuizMapActivity"
+            android:label="Quests" />
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c" />
+
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ImageGameActivity"></activity>
     </application>
 
 </manifest>
