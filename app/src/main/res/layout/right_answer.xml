@@ -5,61 +5,74 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
+        android:text="Question?"
+        android:textSize ="28dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/question" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/answer1"
-        android:text="Button1"
-        android:layout_marginLeft="42dp"
-        android:layout_marginStart="42dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/question" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/answer2"
-        android:text="Button2"
-        android:layout_below="@+id/answer1"
-        android:layout_alignLeft="@+id/answer4"
-        android:layout_alignStart="@+id/answer4"
-        android:layout_marginTop="122dp" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/answer3"
-        android:text="Button3"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_alignBaseline="@+id/answer2"
-        android:layout_alignBottom="@+id/answer2"
-        android:layout_alignLeft="@+id/answer1"
-        android:layout_alignStart="@+id/answer1" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/answer4"
-        android:text="Button4"
-        android:layout_marginBottom="161dp"
-        android:layout_above="@+id/answer3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="46dp"
-        android:layout_marginEnd="46dp" />
-
+        android:id="@+id/question"
+        android:layout_below="@+id/points"
+        android:layout_toLeftOf="@+id/points"
+        android:layout_toStartOf="@+id/points"
+        android:layout_marginTop="58dp" />
     <TextView
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:textSize="28dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginRight="51dp"
+        android:text="SCORE"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/question"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="0" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:id="@+id/answer1"
+        android:text="Button1"
+        android:layout_marginBottom="24dp"
+        android:layout_above="@+id/answer2"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:id="@+id/answer2"
+        android:text="Button2"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:layout_above="@+id/answer3"
+        android:layout_alignLeft="@+id/answer3"
+        android:layout_alignStart="@+id/answer3"
+        android:layout_marginBottom="19dp" />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:id="@+id/answer3"
+        android:text="Button3"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:layout_above="@+id/answer4"
+        android:layout_alignLeft="@+id/answer4"
+        android:layout_alignStart="@+id/answer4"
+        android:layout_marginBottom="32dp" />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:id="@+id/answer4"
+        android:text="Button4"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:layout_marginBottom="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/answer1"
+        android:layout_alignStart="@+id/answer1" />
 
 </RelativeLayout>

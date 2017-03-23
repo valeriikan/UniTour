@@ -1,6 +1,7 @@
 package fi.oulu.unitour.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,34 +16,45 @@ import fi.oulu.unitour.R;
  */
 
 public class RightAnswerActivity extends Activity implements View.OnClickListener {
-    TextView question;
-    TextView points;
-    String questionString = "This is a sample Question?";
+    String questionString = "At what time fablab is open?";
+    String answer1_string ="a)From 10-12";
+    String answer2_string ="b)From 10-16";
+    String answer3_string ="c)From 7-16";
+    String answer4_string ="d)From 8-14";
     int answer = 1;
     int press;
     int score;
-    Button answer1;
-    Button answer2;
-    Button answer3;
-    Button answer4;
+    TextView question;
+    TextView points;
+    TextView answer1;
+    TextView answer2;
+    TextView answer3;
+    TextView answer4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.right_answer);
 
-        question = (TextView) findViewById(R.id.question);
+        question =(TextView)findViewById(R.id.question);
         points = (TextView)findViewById(R.id.points);
-        answer1 = (Button) findViewById(R.id.answer1);
-        answer2 = (Button) findViewById(R.id.answer2);
-        answer3 = (Button) findViewById(R.id.answer3);
-        answer4 = (Button) findViewById(R.id.answer4);
+        answer1 = (TextView)findViewById(R.id.answer1);
+        answer2 = (TextView)findViewById(R.id.answer2);
+        answer3 = (TextView)findViewById(R.id.answer3);
+        answer4 = (TextView)findViewById(R.id.answer4);
+
+        question.setText(questionString);
+        answer1.setText(answer1_string);
+        answer2.setText(answer2_string);
+        answer3.setText(answer3_string);
+        answer4.setText(answer4_string);
 
         answer1.setOnClickListener(this);
         answer2.setOnClickListener(this);
         answer3.setOnClickListener(this);
         answer4.setOnClickListener(this);
-        question.setText(questionString);
+
+
 
 
 
@@ -79,6 +91,14 @@ public class RightAnswerActivity extends Activity implements View.OnClickListene
         if ( press == answer){
             score++;
             points.setText(Integer.toString(score));
+            answer1.setOnClickListener(null);
+            answer2.setOnClickListener(null);
+            answer3.setOnClickListener(null);
+            answer4.setOnClickListener(null);
+            /*
+            Intent intent = new Intent(this, Test.class);
+            startActivity(intent);
+            */
         }
 }
 }
