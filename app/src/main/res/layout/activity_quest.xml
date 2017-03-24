@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_quest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fi.oulu.unitour.activities.QuestActivity">
+
+    <ProgressBar
+        android:id="@+id/loadingBarQuest"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp" />
+
+    <ImageView
+        android:id="@+id/imgQuest"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:id="@+id/tvQuest"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/imgQuest"
+        android:layout_above="@+id/btnScanQR" />
+
+    <Button
+        android:id="@+id/btnScanQR"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/buttons"
+        android:textColor="#000000"
+        android:text="Scan QR code" />
+
+</RelativeLayout>

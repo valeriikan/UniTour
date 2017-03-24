@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     GoogleApiClient mGoogleApiClient;
 
     private static final int RC_SIGN_IN = 1;
+    static final int MAX_LOCATIONS = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +195,9 @@ public class LoginActivity extends AppCompatActivity {
                         String userId = mAuth.getCurrentUser().getUid();
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(firstname + " " + secondname);
+                        currentUserDb.child("completed").setValue("0");
+                        currentUserDb.child("score").setValue("0");
+                        for (int i= 1; i<=MAX_LOCATIONS; i++) {currentUserDb.child("gamedata").child("loc"+i).setValue("0");}
 
                         Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
@@ -279,6 +283,11 @@ public class LoginActivity extends AppCompatActivity {
                         String userId = mAuth.getCurrentUser().getUid();
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(username);
+                        currentUserDb.child("completed").setValue("0");
+                        currentUserDb.child("score").setValue("0");
+                        for (int i= 1; i<=MAX_LOCATIONS; i++) {
+                            currentUserDb.child("gamedata").child("loc"+i).setValue("0");
+                        }
 
                         mProgress.dismiss();
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();

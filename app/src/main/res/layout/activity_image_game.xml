@@ -37,6 +37,30 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/firstlineframe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/question"
+        android:layout_marginTop="22dp">
+
+        <ImageView
+            android:id="@+id/frame1"
+            android:visibility="invisible"
+            android:layout_width="166dp"
+            android:layout_height="166dp" />
+
+        <ImageView
+            android:id="@+id/frame2"
+            android:visibility="invisible"
+            android:layout_width="166dp"
+            android:layout_height="166dp"
+            android:layout_marginLeft="9dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/secondline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,6 +79,30 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginLeft="25dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondlineframe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/firstlineframe"
+        android:layout_marginTop="9dp">
+
+        <ImageView
+            android:id="@+id/frame3"
+            android:visibility="invisible"
+            android:layout_width="166dp"
+            android:layout_height="166dp" />
+
+        <ImageView
+            android:id="@+id/frame4"
+            android:visibility="invisible"
+            android:layout_width="166dp"
+            android:layout_height="166dp"
+            android:layout_marginLeft="9dp"/>
 
     </LinearLayout>
 
@@ -121,6 +169,6 @@
         android:background="@drawable/buttons"
         android:textColor="#000000"
         android:text="Confirm"
-        android:id="@+id/button2" />
+        android:id="@+id/imageButton" />
 
 </RelativeLayout>

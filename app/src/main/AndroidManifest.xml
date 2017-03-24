@@ -19,31 +19,29 @@
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.CampusMapActivity"
+            android:name=".activities.ExploreMapActivity"
             android:label="Campus Map" />
-        <activity android:name=".activities.LocationDescriptor" />
+        <activity android:name=".activities.ExploreActivity" />
         <activity
-            android:name=".activities.QuizMapActivity"
+            android:name=".activities.QuestMapActivity"
             android:label="Quests" />
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
         <activity android:name=".activities.SpecificQuestion" />
-		<activity android:name= ".activities.RightAnswerActivity"></activity>
-        <activity android:name=".activities.Test"></activity>
-        <activity android:name=".activities.TrueFalseActivity"></activity>
-        <activity android:name=".activities.YoutubeActivity"></activity>
+		<activity android:name= ".activities.RightAnswerActivity"/>
+        <activity android:name=".activities.Test"/>
+        <activity android:name=".activities.TrueFalseActivity"/>
+        <activity android:name=".activities.YoutubeActivity"/>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ImageGameActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c" />
-
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.ImageGameActivity"></activity>
     </application>
 
 </manifest>

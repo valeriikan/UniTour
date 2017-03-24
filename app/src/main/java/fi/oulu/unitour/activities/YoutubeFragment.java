@@ -26,11 +26,13 @@ import static com.google.android.youtube.player.YouTubePlayer.PlayerStyle.DEFAUL
 
 public class YoutubeFragment extends Fragment {
     private static String API_KEY ="AIzaSyCvEl8lB5YoPIW6PE4Lql7C-cE1qfvoquY";
-    private static String VIDEO_ID = "Gw_7ffXxHE";
+    private static String VIDEO_ID = "_Gw_7ffXxHE";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_youtube,container,false);
+
+
 
         YouTubePlayerSupportFragment youTubeFragment = YouTubePlayerSupportFragment.newInstance();
 
@@ -41,7 +43,7 @@ public class YoutubeFragment extends Fragment {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean Restored) {
                 if(!Restored){
-                    player.setPlayerStyle(CHROMELESS);
+                    player.setPlayerStyle(DEFAULT);
                     player.loadVideo(VIDEO_ID);
                     player.play();
 

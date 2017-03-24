@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import fi.oulu.unitour.R;
 
@@ -33,7 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
         btnWelcomeExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeActivity.this, CampusMapActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, ExploreMapActivity.class);
                 startActivity(intent);
             }
         });

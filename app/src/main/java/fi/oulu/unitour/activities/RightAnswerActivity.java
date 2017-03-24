@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import fi.oulu.unitour.R;
 
 /**
@@ -31,6 +35,13 @@ public class RightAnswerActivity extends Activity implements View.OnClickListene
     TextView answer3;
     TextView answer4;
 
+    //Firebase authentication object
+    FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
+
+    String placeId;
+
+    DatabaseReference locRefference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +66,12 @@ public class RightAnswerActivity extends Activity implements View.OnClickListene
         answer4.setOnClickListener(this);
 
 
-
+        placeId = getIntent().getStringExtra("LOCATION_ID");
+        //Firebase elements declaration
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        String userId = mAuth.getCurrentUser().getUid();
+        locRefference = mDatabase.child(userId).child("gamedata").child("loc"+placeId);
 
 
     }
@@ -66,26 +82,38 @@ public class RightAnswerActivity extends Activity implements View.OnClickListene
             case R.id.answer1:
                 press = 1;
                 Log.v("lol",Integer.toString(press));
-                message = Toast.makeText(getApplicationContext(),"Answer1",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"Right answer! 1 more point",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map1 = new Intent(RightAnswerActivity.this, QuestMapActivity.class);
+                startActivity(map1);
                 break;
             case R.id.answer2:
                 press = 2;
                 Log.v("lol",Integer.toString(press));
-                message = Toast.makeText(getApplicationContext(),"Answer2",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"Wrong answer",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map2 = new Intent(RightAnswerActivity.this, QuestMapActivity.class);
+                startActivity(map2);
                 break;
             case R.id.answer3:
                 press = 3;
                 Log.v("lol",Integer.toString(press));
-                message = Toast.makeText(getApplicationContext(),"Answer3",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"Wrong answer",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map3 = new Intent(RightAnswerActivity.this, QuestMapActivity.class);
+                startActivity(map3);
                 break;
             case R.id.answer4:
                 press = 4;
                 Log.v("lol",Integer.toString(press));
-                message = Toast.makeText(getApplicationContext(),"Answer4",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"Wrong answer",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map4 = new Intent(RightAnswerActivity.this, QuestMapActivity.class);
+                startActivity(map4);
                 break;
         }
         if ( press == answer){

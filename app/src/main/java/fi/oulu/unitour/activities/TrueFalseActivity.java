@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 import fi.oulu.unitour.R;
@@ -27,6 +31,14 @@ public class TrueFalseActivity extends Activity implements View.OnClickListener 
     int press;
     int score;
 
+    //Firebase authentication object
+    FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
+
+    String placeId;
+
+    DatabaseReference locRefference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +52,13 @@ public class TrueFalseActivity extends Activity implements View.OnClickListener 
         button_true.setOnClickListener(this);
         button_false.setOnClickListener(this);
 
+        placeId = getIntent().getStringExtra("LOCATION_ID");
+        //Firebase elements declaration
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        String userId = mAuth.getCurrentUser().getUid();
+        locRefference = mDatabase.child(userId).child("gamedata").child("loc"+placeId);
+
     }
     public void onClick(View v) {
         Toast message;
@@ -47,13 +66,19 @@ public class TrueFalseActivity extends Activity implements View.OnClickListener 
         switch(v.getId()){
             case R.id.button_true:
                 press = 1;
-                message = Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"Wrong answer, it closes at 13:30",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map1 = new Intent(TrueFalseActivity.this, QuestMapActivity.class);
+                startActivity(map1);
                 break;
             case R.id.button_false:
                 press = 0;
-                message = Toast.makeText(getApplicationContext(),"False",Toast.LENGTH_SHORT);
+                message = Toast.makeText(getApplicationContext(),"You are right. It closes at 13:30. You earned one point",Toast.LENGTH_SHORT);
                 message.show();
+                locRefference.setValue("1");
+                Intent map2 = new Intent(TrueFalseActivity.this, QuestMapActivity.class);
+                startActivity(map2);
                 break;
         }
         if (answer == press){

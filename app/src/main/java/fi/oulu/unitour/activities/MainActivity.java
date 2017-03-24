@@ -8,19 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Map;
 
 import fi.oulu.unitour.R;
 
@@ -72,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
         imgTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,QuizMapActivity.class);
+                Intent intent = new Intent(MainActivity.this,QuestMapActivity.class);
                 startActivity(intent);
             }
         });
         imgExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,CampusMapActivity.class);
+                Intent intent = new Intent(MainActivity.this,ExploreMapActivity.class);
                 startActivity(intent);
             }
         });

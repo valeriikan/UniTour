@@ -21,7 +21,7 @@ import java.util.Map;
 
 import fi.oulu.unitour.R;
 
-public class LocationDescriptor extends AppCompatActivity{
+public class ExploreActivity extends AppCompatActivity{
 
     //declaration of variables for layout elements
     TextView locDescripTxt;
@@ -34,7 +34,7 @@ public class LocationDescriptor extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.location_descriptor);
+        setContentView(R.layout.activity_explore);
 
         //attaching layout elements to variables
         locDescripTxt = (TextView) findViewById(R.id.locDescripTxt);
@@ -65,8 +65,7 @@ public class LocationDescriptor extends AppCompatActivity{
                     }
                 };
 
-                Picasso.with(LocationDescriptor.this).load(imageUrl).fit().centerCrop().into(locImageIV, loadingCallback);
-
+                Picasso.with(ExploreActivity.this).load(imageUrl).fit().centerCrop().into(locImageIV, loadingCallback);
             }
 
             @Override

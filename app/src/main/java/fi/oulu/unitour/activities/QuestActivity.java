@@ -4,75 +4,88 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import java.util.Map;
 
 import fi.oulu.unitour.R;
 
-/**
- * Created by Majid on 3/5/2017.
- */
-
 public class QuestActivity extends AppCompatActivity {
-    private static String placeID;
-    private static ImageView questImage;
-    private static TextView questText;
 
-    Button ScanQRBtn;
+    //declaration of variables for layout elements
+    ImageView imgQuest;
+    TextView tvQuest;
+    ProgressBar loadingBarQuest;
+    Button btnScanQR;
+
+    //Firebase authentication objects
+    DatabaseReference mDatabase;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.quest_part1);
+        setContentView(R.layout.activity_quest);
 
-        placeID = getIntent().getStringExtra("LOCATION_ID");
-        questImage = (ImageView) findViewById(R.id.questPicIV);
-        questText = (TextView) findViewById(R.id.questTV);
-        ScanQRBtn = (Button) findViewById(R.id.scanQRBtn);
+        final String placeId = getIntent().getStringExtra("LOCATION_ID");
 
-        ScanQRBtn.setOnClickListener(new View.OnClickListener() {
+        //attaching layout elements to variables
+        imgQuest = (ImageView) findViewById(R.id.imgQuest);
+        tvQuest = (TextView) findViewById(R.id.tvQuest);
+        btnScanQR = (Button) findViewById(R.id.btnScanQR);
+        loadingBarQuest = (ProgressBar) findViewById(R.id.loadingBarQuest);
+
+        btnScanQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(QuestActivity.this, QrScannerActivity.class);
+                intent.putExtra("LOCATION_ID", placeId);
                 startActivity(intent);
             }
         });
 
-        setTitle("Finding Locations");
-        switch (placeID)
-        {
-            case "1":
-                questImage.setImageResource(R.drawable.kastari_art);
-                        questText.setText("Go and find the angle shown in the picture and scan the QR code near there. " +
-                                "Then you will find a clue to the next location");
-                /*Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.myanimation);
-                questText.startAnimation(anim);
-                Animation anim1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clockwise);
-                questImage.startAnimation(anim1);
-                */
-                break;
-            case "2":
-                        questImage.setImageResource(R.drawable.datagarage);
-                        questText.setText("Go and find the angle shown in the picture and scan the QR code near there. " +
-                        "Then you will find a clue to the next location");
-                break;
-            case "3":
-                        questImage.setImageResource(R.drawable.datagarage);
-                        questText.setText("Go and find the location shown in the picture and scan the QR over there. " +
-                        "Then you will find a clue to the next location");
-                break;
-            case "4":
-                        questImage.setImageResource(R.drawable.tietotalo);
-                        questText.setText("Go and find the location shown in the picture and scan the QR over there. " +
-                        "Then you will find a clue to the next location");
-                break;
-            case "7":   Intent intent = new Intent(this, SpecificQuestion.class);
-                        startActivity(intent);
-                break;
-        }
+        //retrieving place data from Firebase database
+        //String placeId = getIntent().getStringExtra("LOCATION_ID");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("locations").child(placeId);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, String> map = (Map) dataSnapshot.getValue();
+                String name = map.get("name");
+                String description = map.get("description");
+                String imageUrl = map.get("imageUrl");
+                setTitle(name);
+                tvQuest.setText(description);
+
+                Callback loadingCallback = new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        loadingBarQuest.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                    }
+                };
+
+                Picasso.with(QuestActivity.this).load(imageUrl).fit().centerCrop().into(imgQuest, loadingCallback);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
