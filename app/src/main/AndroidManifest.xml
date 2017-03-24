@@ -33,6 +33,10 @@
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
         <activity android:name=".activities.SpecificQuestion" />
+		<activity android:name= ".activities.RightAnswerActivity"></activity>
+        <activity android:name=".activities.Test"></activity>
+        <activity android:name=".activities.TrueFalseActivity"></activity>
+        <activity android:name=".activities.YoutubeActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
