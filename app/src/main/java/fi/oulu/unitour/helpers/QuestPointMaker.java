@@ -1,33 +1,28 @@
 package fi.oulu.unitour.helpers;
 
-import android.graphics.Color;
-import android.support.annotation.NonNull;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.Map;
 
 import fi.oulu.unitour.R;
 
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource;
-
-/**
- * Created by Majid on 2/15/2017.
- */
-
 public class QuestPointMaker {
+
+    // amount of total checkpoints
     private static final int LOCATION_NUMBERS = 16;
 
+    // checkpoints list
     private static final LatLng KASTARI = new LatLng(65.057089, 25.467710);
     private static final LatLng TIETOTALO = new LatLng(65.057864, 25.469620);
     private static final LatLng DATAGARAGE = new LatLng(65.057985, 25.468475);
@@ -45,49 +40,63 @@ public class QuestPointMaker {
     private static final LatLng BALANCE = new LatLng(65.061110, 25.468036);
     private static final LatLng FACULTYOFEDUCATION = new LatLng(65.061215, 25.468864);
 
-    //private static final Polyline gameRoute;
+    private static final LatLng[] checkpoints = {KASTARI, TIETOTALO, DATAGARAGE, VENDORMACHINE, AIESEC,
+            ITSERVICES, TELLUS, FABLAB, WALLINFRONTOFL2, CENTRALSTATION,
+            STUDENTCENTER, AVA, ZOOLOGICALMUSEUM, PEGASUSLIBRARY, BALANCE, FACULTYOFEDUCATION};
 
-
-    private static final LatLng[] checkpoints = {KASTARI,TIETOTALO,DATAGARAGE,VENDORMACHINE,AIESEC,ITSERVICES,TELLUS,FABLAB,WALLINFRONTOFL2,
-            CENTRALSTATION,STUDENTCENTER,AVA,ZOOLOGICALMUSEUM,PEGASUSLIBRARY,BALANCE,FACULTYOFEDUCATION};
     private static final Marker[] uniMarkers = new Marker[LOCATION_NUMBERS];
 
-
+    // checkpoints icons
     private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.red_star);
     private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.green_action);
 
+    //Firebase authentication objects
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     public QuestPointMaker() {
-
-
+        // get user's gamedata link
+        mAuth = FirebaseAuth.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("gamedata");
     }
-    private Marker addMarker(GoogleMap map, LatLng coordination, String title, String snippet, BitmapDescriptor icon)
-    {
-        return map.addMarker(new MarkerOptions()
+
+    private Marker addMarker(GoogleMap map, LatLng coordination, String title, String snippet, BitmapDescriptor icon) {
+
+        final Marker locMarker = map.addMarker(new MarkerOptions()
                 .position(coordination)
                 .title(title)
                 .snippet(snippet)
                 .icon(icon));
-    }
-    public Marker[] addCheckpoints(GoogleMap map)
-    {
-        for (int i = 0; i < LOCATION_NUMBERS; i++)
-        {
-            LatLng ltlg = checkpoints[i];
-            String id = Integer.toString(i+1);
-            uniMarkers[i] = addMarker(map,ltlg,ltlg.toString(),id, unfinishedCheckpoint);
-        }
-        return uniMarkers;
+        return locMarker;
     }
 
-    public void makeRoute(GoogleMap map)
-    {
-        int i = 0;
-        while (i<=LOCATION_NUMBERS-2)
-        {
-            LatLng src = checkpoints[i];
-            LatLng dest = checkpoints[i+1];
-            map.addPolyline(new PolylineOptions().add(src,dest).width(10).color(Color.BLACK).geodesic(true));
-            i=i+1;
-        }
+    public Marker[] addCheckpoints(final GoogleMap map) {
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(DataSnapshot dataSnapshot) {
+               Map<String, String> firebaseMap = (Map) dataSnapshot.getValue();
+
+               for (int i = 0; i<LOCATION_NUMBERS; i++) {
+                   int pos= i+1;
+                   String status = firebaseMap.get("loc" + pos);
+                   LatLng ltlg = checkpoints[i];
+                   String id = String.valueOf(pos);
+                   BitmapDescriptor icon;
+
+                   if (status.equals("1")) { icon = finishedCheckpoint; }
+                   else { icon = unfinishedCheckpoint; }
+                   uniMarkers[i] = addMarker(map,ltlg,ltlg.toString(),id, icon);
+               }
+           }
+
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
+
+           }
+       });
+
+        return uniMarkers;
     }
 }

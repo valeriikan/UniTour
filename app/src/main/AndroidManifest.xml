@@ -32,6 +32,7 @@
             android:label="Quests" />
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
+        <activity android:name=".activities.SpecificQuestion" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

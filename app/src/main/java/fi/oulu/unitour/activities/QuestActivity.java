@@ -70,6 +70,9 @@ public class QuestActivity extends AppCompatActivity {
                         questText.setText("Go and find the location shown in the picture and scan the QR over there. " +
                         "Then you will find a clue to the next location");
                 break;
+            case "7":   Intent intent = new Intent(this, SpecificQuestion.class);
+                        startActivity(intent);
+                break;
         }
     }
 }
