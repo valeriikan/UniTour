@@ -28,6 +28,7 @@
         <activity android:name=".activities.QuizMapActivity" android:label="Quests"/>
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
+        <activity android:name=".activities.SpecificQuestion" />
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c"/>

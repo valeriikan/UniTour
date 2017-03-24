@@ -28,6 +28,9 @@ public class SignupActivity extends AppCompatActivity {
     EditText etSignupEmail, etSignupPassword, etSignupFirstname, etSignupSecondname;
     Button btnSignUp;
 
+    //Maximum number of checkpoints
+    static final int MAX_LOCATIONS = 16;
+
     //Firebase authentication objects
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
@@ -109,6 +112,13 @@ public class SignupActivity extends AppCompatActivity {
                         currentUserDb.child("firstname").setValue(firstname);
                         currentUserDb.child("secondname").setValue(secondname);
 
+                        //adding gamedata when user is created
+                        String str = "loc";
+                        for (int i = 1; i<=MAX_LOCATIONS; i++) {
+                            if (i<10) str = "loc0";
+                            else str = "loc";
+                            currentUserDb.child("gamedata").child(str + i).setValue(0);
+                        }
                         Toast.makeText(SignupActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
                         Intent intent = new Intent(SignupActivity.this, MainActivity.class);

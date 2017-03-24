@@ -1,7 +1,6 @@
 package fi.oulu.unitour.activities;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,10 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,21 +23,24 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnGroundOverlayClickListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import fi.oulu.unitour.R;
-import fi.oulu.unitour.helpers.MapLocationMaker;
 import fi.oulu.unitour.helpers.QuestPointMaker;
 
-/**
- * Created by Majid on 3/4/2017.
- */
-
-public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCallback, OnMarkerClickListener, OnGroundOverlayClickListener {
+public class QuizMapActivity extends AppCompatActivity
+        implements OnMapReadyCallback, OnMarkerClickListener, OnGroundOverlayClickListener {
 
     //the boundary of uni map to make ground overlay
     private LatLngBounds uniBound = new LatLngBounds(
             new LatLng(65.056704, 25.463102),       // South west corner
             new LatLng(65.061842, 25.470193));      // North east corner
+
+    //Firebase authentication objects
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     //default position of university of Oulu on Google map
     private static final CameraPosition uniOulu =
@@ -63,6 +62,9 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
         mapFragment.getMapAsync(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -108,6 +110,10 @@ public class QuizMapActivity extends AppCompatActivity implements OnMapReadyCall
     }
     @Override
     public void onGroundOverlayClick(GroundOverlay groundOverlay)
+    {
+
+    }
+    private void getActiveCheckpoints()
     {
 
     }
