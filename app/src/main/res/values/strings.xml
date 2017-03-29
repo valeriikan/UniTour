@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UniTour</string>
+    <string name="facebook_app_id">1862027007408127</string>
+    <string name="facebook_provider_id">facebook.com</string>
 </resources>

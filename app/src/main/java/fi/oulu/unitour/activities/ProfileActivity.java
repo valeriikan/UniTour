@@ -15,10 +15,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.CircleTransform;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -54,6 +57,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        final Callback callback = new Callback() {
+            @Override
+            public void onSuccess() {
+                profileLoading.setVisibility(View.GONE);
+                profileContent.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+            }
+        };
+
         String userId = mAuth.getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -61,9 +76,10 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> map = (Map) dataSnapshot.getValue();
                 String name = map.get("name");
+                String imageUrl = map.get("imageUrl");
                 tvMainName.setText(name);
-                profileLoading.setVisibility(View.GONE);
-                profileContent.setVisibility(View.VISIBLE);
+                Picasso.with(ProfileActivity.this).load(imageUrl).fit().centerCrop()
+                        .transform(new CircleTransform()).into(mainUserpic, callback);
             }
 
             @Override
