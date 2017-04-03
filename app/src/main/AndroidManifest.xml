@@ -14,14 +14,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.WelcomeActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.WelcomeActivity" />
+        <activity android:name=".activities.MainActivity" />
         <activity
             android:name=".activities.ExploreMapActivity"
             android:label="Campus Map" />
@@ -32,17 +36,19 @@
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
         <activity android:name=".activities.SpecificQuestion" />
-		<activity android:name= ".activities.RightAnswerActivity"/>
-        <activity android:name=".activities.Test"/>
-        <activity android:name=".activities.TrueFalseActivity"/>
-        <activity android:name=".activities.YoutubeActivity"/>
+        <activity android:name=".activities.RightAnswerActivity" />
+        <activity android:name=".activities.Test" />
+        <activity android:name=".activities.TrueFalseActivity" />
+        <activity android:name=".activities.YoutubeActivity" />
         <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.ImageGameActivity"/>
+        <activity android:name=".activities.ImageGameActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB6jKHu61taAsWb-1_ayE8PjNT5Mxb-u8c" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package fi.oulu.unitour.activities;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Firebase authentication objects
     FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Firebase elements declaration
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null) {
-                    //open WelcomeActivity if the user is not signed in
-                    Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-            }
-        };
 
         //attaching layout elements to variables
         imgProfile = (ImageView) findViewById(R.id.imgProfile);
@@ -77,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -98,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 // sign out
                 mAuth.signOut();
                 Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
 
             case R.id.action_exit:
