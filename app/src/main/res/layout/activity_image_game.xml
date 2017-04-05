@@ -106,60 +106,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/loadingfirstline"
-        android:layout_width="325dp"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/question"
-        android:layout_marginTop="30dp">
-
-        <ProgressBar
-            android:id="@+id/img1Loading"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"/>
-
-        <ProgressBar
-            android:id="@+id/img2Loading"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="125dp"
-            android:layout_marginTop="50dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/loadingsecondline"
-        android:layout_width="325dp"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/loadingfirstline"
-        android:layout_marginTop="25dp">
-
-        <ProgressBar
-            android:id="@+id/img3Loading"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"/>
-
-        <ProgressBar
-            android:id="@+id/img4Loading"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="125dp"
-            android:layout_marginTop="50dp"/>
-
-    </LinearLayout>
-
     <Button
         android:layout_width="250dp"
         android:layout_height="wrap_content"
