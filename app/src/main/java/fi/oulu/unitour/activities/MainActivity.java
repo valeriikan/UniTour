@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         imgExplore = (ImageView) findViewById(R.id.imgExplore);
 
         //attaching images to imageViews and applying listeners to them
-        imgProfile.setImageResource(R.drawable.img_userprofile);
-        imgTour.setImageResource(R.drawable.img_tour);
-        imgExplore.setImageResource(R.drawable.img_explore);
+        imgProfile.setImageResource(R.drawable.ui_userprofile);
+        imgTour.setImageResource(R.drawable.ui_tour);
+        imgExplore.setImageResource(R.drawable.ui_explore);
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

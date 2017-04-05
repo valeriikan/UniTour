@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="Email"/>
 
@@ -116,7 +116,7 @@
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="Password"/>
 
@@ -127,7 +127,7 @@
             android:layout_marginTop="5dp"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="First name"/>
 
@@ -138,7 +138,7 @@
             android:layout_marginTop="5dp"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="Second name"/>
 
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="Email"/>
 
@@ -171,7 +171,7 @@
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
             android:textAlignment="center"
-            android:background="@drawable/etfields"
+            android:background="@drawable/view_edittext"
             android:padding="10dp"
             android:hint="Password"/>
 
@@ -184,7 +184,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="35dp"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:textColor="#000000"
         android:text="Sign up"/>
 
@@ -196,7 +196,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="35dp"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:textColor="#000000"
         android:text="Sign in"/>
 

@@ -18,7 +18,7 @@
         android:layout_above="@+id/btnWelcomeExplore"
         android:layout_marginTop="65dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:text="Sign up"/>
 
     <Button
@@ -29,7 +29,7 @@
         android:layout_marginBottom="50dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:text="Explore"/>
 
 </RelativeLayout>

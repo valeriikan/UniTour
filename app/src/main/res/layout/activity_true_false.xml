@@ -38,7 +38,7 @@
         android:textSize="28dp"
         android:textAlignment="center"
         android:layout_marginBottom="27dp"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:layout_above="@+id/button_false"
         android:layout_centerHorizontal="true" />
 
@@ -49,7 +49,7 @@
         android:id="@+id/button_false"
         android:textSize="28dp"
         android:textAlignment="center"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:layout_marginBottom="168dp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/button_true"

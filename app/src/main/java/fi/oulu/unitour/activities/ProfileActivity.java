@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileLoading = (ProgressBar) findViewById(R.id.profileLoading);
         tvMainName = (TextView) findViewById(R.id.tvProfileName);
         mainUserpic = (ImageView) findViewById(R.id.profileUserpic);
-        mainUserpic.setImageResource(R.drawable.ic_applogo);
+        mainUserpic.setImageResource(R.drawable.ui_applogo);
 
         mainUserpic.setOnClickListener(new View.OnClickListener() {
             @Override

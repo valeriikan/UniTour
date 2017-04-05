@@ -58,10 +58,10 @@ public class ImageGameActivity extends AppCompatActivity {
         frame2 = (ImageView) findViewById(R.id.frame2);
         frame3 = (ImageView) findViewById(R.id.frame3);
         frame4 = (ImageView) findViewById(R.id.frame4);
-        frame1.setImageResource(R.drawable.ic_frame);
-        frame2.setImageResource(R.drawable.ic_frame);
-        frame3.setImageResource(R.drawable.ic_frame);
-        frame4.setImageResource(R.drawable.ic_frame);
+        frame1.setImageResource(R.drawable.view_frame);
+        frame2.setImageResource(R.drawable.view_frame);
+        frame3.setImageResource(R.drawable.view_frame);
+        frame4.setImageResource(R.drawable.view_frame);
         img1Loading = (ProgressBar) findViewById(R.id.img1Loading);
         img2Loading = (ProgressBar) findViewById(R.id.img2Loading);
         img3Loading = (ProgressBar) findViewById(R.id.img3Loading);

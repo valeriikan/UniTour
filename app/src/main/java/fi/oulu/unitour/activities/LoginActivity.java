@@ -138,9 +138,9 @@ public class LoginActivity extends AppCompatActivity {
         mProgress = new ProgressDialog(this);
 
         //attaching images to imageViews and applying listeners to them
-        imgFacebook.setImageResource(R.drawable.img_facebook);
-        imgTwitter.setImageResource(R.drawable.img_twitter);
-        imgGoogle.setImageResource(R.drawable.img_google);
+        imgFacebook.setImageResource(R.drawable.ui_social_facebook);
+        imgTwitter.setImageResource(R.drawable.ui_social_twitter);
+        imgGoogle.setImageResource(R.drawable.ui_social_google);
         imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:id="@+id/answer1"
         android:text="Button1"
         android:layout_marginBottom="24dp"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:id="@+id/answer2"
         android:text="Button2"
         android:textSize="28dp"
@@ -53,7 +53,7 @@
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:id="@+id/answer3"
         android:text="Button3"
         android:textSize="28dp"
@@ -65,7 +65,7 @@
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:id="@+id/answer4"
         android:text="Button4"
         android:textSize="28dp"

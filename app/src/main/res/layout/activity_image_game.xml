@@ -166,7 +166,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/buttons"
+        android:background="@drawable/view_button"
         android:textColor="#000000"
         android:text="Confirm"
         android:id="@+id/imageButton" />
