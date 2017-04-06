@@ -24,7 +24,7 @@ public class ImageGameActivity extends AppCompatActivity {
 
     //Firebase authentication object
     FirebaseAuth mAuth;
-    DatabaseReference mRefference;
+    DatabaseReference mReference;
 
     int answer = 0;
 
@@ -37,7 +37,7 @@ public class ImageGameActivity extends AppCompatActivity {
         //Firebase elements declaration
         mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
-        mRefference = FirebaseDatabase.getInstance().getReference()
+        mReference = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(userId).child("gamedata").child("loc"+placeId);
 
         //attaching layout elements to variables
@@ -127,7 +127,7 @@ public class ImageGameActivity extends AppCompatActivity {
                         Toast.makeText(ImageGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
-                        mRefference.setValue("1");
+                        mReference.setValue("1");
                         Intent map = new Intent(ImageGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
                         Toast.makeText(ImageGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
