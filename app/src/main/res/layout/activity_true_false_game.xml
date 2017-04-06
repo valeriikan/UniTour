@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_true_false_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/trueFalseQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="What time?"/>
+
+    <Button
+        android:id="@+id/trueFalseBtn1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/trueFalseBtn2"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="True" />
+
+    <Button
+        android:id="@+id/trueFalseBtn2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="False" />
+
+</RelativeLayout>

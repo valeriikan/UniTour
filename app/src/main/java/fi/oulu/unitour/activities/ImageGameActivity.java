@@ -121,10 +121,10 @@ public class ImageGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch (answer) {
                     case 0:
-                        Toast.makeText(ImageGameActivity.this, "Select an answer", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ImageGameActivity.this, "Select an answer", Toast.LENGTH_SHORT).show();
                         break;
                     case 1: case 2: case 3:
-                        Toast.makeText(ImageGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ImageGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
                         mReference.setValue("1");

@@ -3,7 +3,6 @@ package fi.oulu.unitour.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -67,7 +66,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "3":
                 if (result.equals("sfw2017-unitour-datagarage")) {
-                    Intent game = new Intent(this, RightAnswerActivity.class);
+                    Intent game = new Intent(this, RightAnswerGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {
@@ -91,7 +90,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "5":
                 if (result.equals("sfw2017-unitour-aisec")) {
-                    Intent game = new Intent(this, SpecificQuestion.class);
+                    Intent game = new Intent(this, SpecificQuestionGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {
@@ -103,7 +102,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "6":
                 if (result.equals("sfw2017-unitour-itservices")) {
-                    Intent game = new Intent(this, TrueFalseActivity.class);
+                    Intent game = new Intent(this, TrueFalseGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {
@@ -115,7 +114,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "7":
                 if (result.equals("sfw2017-unitour-tellus")) {
-                    Intent game = new Intent(this, SpecificQuestion.class);
+                    Intent game = new Intent(this, SpecificQuestionGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {
@@ -127,7 +126,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "8":
                 if (result.equals("sfw2017-unitour-fablab")) {
-                    Intent game = new Intent(this, RightAnswerActivity.class);
+                    Intent game = new Intent(this, RightAnswerGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {
@@ -211,7 +210,7 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "15":
                 if (result.equals("sfw2017-unitour-balance")) {
-                    Intent game = new Intent(this, TrueFalseActivity.class);
+                    Intent game = new Intent(this, TrueFalseGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
                 } else {

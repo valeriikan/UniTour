@@ -35,10 +35,10 @@
             android:label="Quests" />
         <activity android:name=".activities.QuestActivity" />
         <activity android:name=".activities.QrScannerActivity" />
-        <activity android:name=".activities.SpecificQuestion" />
-        <activity android:name=".activities.RightAnswerActivity" />
+        <activity android:name=".activities.SpecificQuestionGameActivity" />
+        <activity android:name=".activities.RightAnswerGameActivity" />
         <activity android:name=".activities.Test" />
-        <activity android:name=".activities.TrueFalseActivity" />
+        <activity android:name=".activities.TrueFalseGameActivity" />
         <activity android:name=".activities.YoutubeActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ImageGameActivity" />
