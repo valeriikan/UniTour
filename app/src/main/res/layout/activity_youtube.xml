@@ -4,21 +4,20 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id ="@+id/youtube_layout"
-        android:visibility="visible">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     </FrameLayout>
 
     <Button
+        android:id="@+id/btnYoutube"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/buttons"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/view_button"
         android:textColor="#000000"
-        android:text="Continue"
-        android:id="@+id/youtubeButton" />
+        android:text="Continue" />
 
 </RelativeLayout>

@@ -47,8 +47,8 @@ public class QuestPointMaker {
     private static final Marker[] uniMarkers = new Marker[LOCATION_NUMBERS];
 
     // checkpoints icons
-    private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.red_star);
-    private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.green_action);
+    private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_redstar);
+    private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_completed);
 
     //Firebase authentication objects
     private FirebaseAuth mAuth;

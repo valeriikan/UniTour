@@ -1,7 +1,5 @@
 package fi.oulu.unitour.helpers;
 
-import android.support.annotation.NonNull;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -9,14 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-
 import fi.oulu.unitour.R;
-
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource;
 
 /**
  * Created by Majid on 2/15/2017.
@@ -41,8 +32,8 @@ public class MapLocationMaker {
     private static final LatLng[] checkpoints = {KASTARI,DATAGARAGE,ITEE,STORIES,TELLUS,FABLAB,OYY,CENTRALSTATION,STUDENTCENTER,AVA,ZOOLOGICALMUSEUM,BALANCE,PEGASUSLIBRARY};
     private static final Marker[] uniMarkers = new Marker[LOCATION_NUMBERS];
 
-    private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.location_icon);
-    private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.green_action);
+    private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_explore);
+    private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_completed);
 
     public MapLocationMaker() {
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_right_answer_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgRightAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="217dp" />
+
+    <TextView
+        android:id="@+id/rightAnswerQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/imgRightAnswer"
+        android:textAlignment="center"
+        android:text="True or false?" />
+
+    <Button
+        android:id="@+id/rightAnswerBtn1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/rightAnswerBtn2"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="A" />
+
+    <Button
+        android:id="@+id/rightAnswerBtn2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/rightAnswerBtn3"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="B" />
+
+    <Button
+        android:id="@+id/rightAnswerBtn3"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/rightAnswerBtn4"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="C" />
+
+    <Button
+        android:id="@+id/rightAnswerBtn4"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="D" />
+
+</RelativeLayout>

@@ -19,6 +19,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,17 +36,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Arrays;
 
 import fi.oulu.unitour.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    ImageView imgFacebook, imgTwitter, imgGoogle;
+    ImageView imgFacebook, imgGoogle;
     TextView tvSwitch, tvSocial;
     Switch switchLogin;
     EditText etLoginEmail, etLoginPassword, etSignupEmail, etSignupPassword, etSignupFirstname, etSignupSecondname;
@@ -47,27 +58,67 @@ public class LoginActivity extends AppCompatActivity {
     LinearLayout layoutLogin, layoutSignup, layoutUnitour;
     ProgressDialog mProgress;
 
-    //Firebase authentication object
+    //Authentication objects
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
-
     GoogleApiClient mGoogleApiClient;
+    CallbackManager mCallbackManager;
 
     private static final int RC_SIGN_IN = 1;
+    private static final int FB_SIGN_IN = 2;
     static final int MAX_LOCATIONS = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-        //Firebase elements declaration
+        //Authentication elements declaration
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mCallbackManager = CallbackManager.Factory.create();
+
+        // GOOGLE Sign In integration
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        // GOOGLE Sign In integration
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        Toast.makeText(LoginActivity.this, "Login error", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        // FACEBOOK Sign It integration
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.wtf("myTag", "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.wtf("myTag", "facebook:onCancel");
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.wtf("myTag", "facebook:onError", error);
+                // ...
+            }
+        });
 
         //attaching layout elements to variables
         imgFacebook = (ImageView) findViewById(R.id.imgFacebook);
-        imgTwitter = (ImageView) findViewById(R.id.imgTwitter);
         imgGoogle = (ImageView) findViewById(R.id.imgGoogle);
         tvSocial = (TextView) findViewById(R.id.tvSocial);
         tvSwitch = (TextView) findViewById(R.id.tvSwitch);
@@ -86,19 +137,13 @@ public class LoginActivity extends AppCompatActivity {
         mProgress = new ProgressDialog(this);
 
         //attaching images to imageViews and applying listeners to them
-        imgFacebook.setImageResource(R.drawable.img_facebook);
-        imgTwitter.setImageResource(R.drawable.img_twitter);
-        imgGoogle.setImageResource(R.drawable.img_google);
+        imgFacebook.setImageResource(R.drawable.ui_social_facebook);
+        imgGoogle.setImageResource(R.drawable.ui_social_google);
         imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
-            }
-        });
-        imgTwitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
+                LoginManager.getInstance()
+                        .logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
             }
         });
         imgGoogle.setOnClickListener(new View.OnClickListener() {
@@ -154,23 +199,6 @@ public class LoginActivity extends AppCompatActivity {
                emailLogin();
             }
         });
-
-        // GOOGLE Sign In integration
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        // GOOGLE Sign In integration
-        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginActivity.this, "Login error", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
 
     }
 
@@ -266,6 +294,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
+        } else {
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -277,12 +307,15 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("myTag", "signInWithCredential:onComplete:" + task.isSuccessful());
+                        Log.wtf("myTag", "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         String username = mAuth.getCurrentUser().getDisplayName();;
                         String userId = mAuth.getCurrentUser().getUid();
+                        String imageUrl = String.valueOf(mAuth.getCurrentUser().getPhotoUrl());
+                        imageUrl = imageUrl.replace("/s96-c/","/s450-c/");
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(username);
+                        currentUserDb.child("imageUrl").setValue(imageUrl);
                         currentUserDb.child("completed").setValue("0");
                         currentUserDb.child("score").setValue("0");
                         for (int i= 1; i<=MAX_LOCATIONS; i++) {
@@ -299,7 +332,52 @@ public class LoginActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("myTag", "signInWithCredential", task.getException());
+                            Log.wtf("myTag", "signInWithCredential", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                        // ...
+                    }
+                });
+    }
+
+    // FACEBOOK Sing In integration
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.wtf("myTag", "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.wtf("myTag", "signInWithCredential:onComplete:" + task.isSuccessful());
+
+                        String username = mAuth.getCurrentUser().getDisplayName();;
+                        String userId = mAuth.getCurrentUser().getUid();
+                        String facebookId = "";
+                        // find the Facebook profile and get the user's id
+                        for(UserInfo profile : mAuth.getCurrentUser().getProviderData()) {
+                            // check if the provider id matches "facebook.com"
+                            if(profile.getProviderId().equals(getString(R.string.facebook_provider_id))) {
+                                facebookId = profile.getUid();
+                            }
+                        }
+                        String imageUrl = "https://graph.facebook.com/" + facebookId + "/picture?width=450&height=450";
+                        DatabaseReference currentUserDb = mDatabase.child(userId);
+                        currentUserDb.child("name").setValue(username);
+                        currentUserDb.child("imageUrl").setValue(imageUrl);
+                        currentUserDb.child("completed").setValue("0");
+                        currentUserDb.child("score").setValue("0");
+                        for (int i= 1; i<=MAX_LOCATIONS; i++) {
+                            currentUserDb.child("gamedata").child("loc"+i).setValue("0");
+                        }
+
+                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+                        if (!task.isSuccessful()) {
+                            Log.wtf("myTag", "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                         // ...
