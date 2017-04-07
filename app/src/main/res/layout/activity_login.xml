@@ -8,7 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/ic_login_launcher"
     tools:context="fi.oulu.unitour.activities.LoginActivity">
 
     <TextView
@@ -35,16 +34,10 @@
             android:layout_height="70dp" />
 
         <ImageView
-            android:id="@+id/imgTwitter"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
-
-        <ImageView
             android:id="@+id/imgGoogle"
             android:layout_width="70dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:layout_marginLeft="40dp"/>
 
     </LinearLayout>
 

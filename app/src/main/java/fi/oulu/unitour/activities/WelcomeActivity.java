@@ -7,32 +7,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import fi.oulu.unitour.R;
 
 public class WelcomeActivity extends AppCompatActivity {
+
+    //declaration of variables for layout elements
+    ImageView imgWelcomeSignup, imgWelcomeExplore, imgWelcomeAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        //attaching buttons and its listeners
-        Button btnWelcomeLogin = (Button) findViewById(R.id.btnWelcomeLogin);
-        Button btnWelcomeExplore = (Button) findViewById(R.id.btnWelcomeExplore);
+        //attaching layout elements to variables
+        imgWelcomeSignup = (ImageView) findViewById(R.id.imgWelcomeSignup);
+        imgWelcomeExplore = (ImageView) findViewById(R.id.imgWelcomeExplore);
+        imgWelcomeAbout = (ImageView) findViewById(R.id.imgWelcomeAbout);
 
-        btnWelcomeLogin.setOnClickListener(new View.OnClickListener() {
+        //attaching images to imageViews and applying listeners to them
+        imgWelcomeSignup.setImageResource(R.drawable.ui_signup);
+        imgWelcomeExplore.setImageResource(R.drawable.ui_explore_blue);
+        imgWelcomeAbout.setImageResource(R.drawable.ui_about);
+        imgWelcomeSignup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
-        btnWelcomeExplore.setOnClickListener(new View.OnClickListener() {
+        imgWelcomeExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WelcomeActivity.this, ExploreMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgWelcomeAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WelcomeActivity.this, InfoActivity.class);
                 startActivity(intent);
             }
         });

@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         //attaching images to imageViews and applying listeners to them
         imgProfile.setImageResource(R.drawable.ui_userprofile);
-        imgTour.setImageResource(R.drawable.ui_tour);
-        imgExplore.setImageResource(R.drawable.ui_explore);
+        imgTour.setImageResource(R.drawable.ui_quest);
+        imgExplore.setImageResource(R.drawable.ui_explore_green);
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

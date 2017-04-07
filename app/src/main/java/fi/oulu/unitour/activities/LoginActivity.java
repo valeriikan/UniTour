@@ -50,7 +50,7 @@ import fi.oulu.unitour.R;
 public class LoginActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    ImageView imgFacebook, imgTwitter, imgGoogle;
+    ImageView imgFacebook, imgGoogle;
     TextView tvSwitch, tvSocial;
     Switch switchLogin;
     EditText etLoginEmail, etLoginPassword, etSignupEmail, etSignupPassword, etSignupFirstname, etSignupSecondname;
@@ -119,7 +119,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //attaching layout elements to variables
         imgFacebook = (ImageView) findViewById(R.id.imgFacebook);
-        imgTwitter = (ImageView) findViewById(R.id.imgTwitter);
         imgGoogle = (ImageView) findViewById(R.id.imgGoogle);
         tvSocial = (TextView) findViewById(R.id.tvSocial);
         tvSwitch = (TextView) findViewById(R.id.tvSwitch);
@@ -139,19 +138,12 @@ public class LoginActivity extends AppCompatActivity {
 
         //attaching images to imageViews and applying listeners to them
         imgFacebook.setImageResource(R.drawable.ui_social_facebook);
-        imgTwitter.setImageResource(R.drawable.ui_social_twitter);
         imgGoogle.setImageResource(R.drawable.ui_social_google);
         imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance()
                         .logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
-            }
-        });
-        imgTwitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "To be implemented", Toast.LENGTH_SHORT).show();
             }
         });
         imgGoogle.setOnClickListener(new View.OnClickListener() {

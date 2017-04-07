@@ -37,11 +37,11 @@
         <activity android:name=".activities.QrScannerActivity" />
         <activity android:name=".activities.SpecificQuestionGameActivity" />
         <activity android:name=".activities.RightAnswerGameActivity" />
-        <activity android:name=".activities.Test" />
         <activity android:name=".activities.TrueFalseGameActivity" />
         <activity android:name=".activities.YoutubeActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ImageGameActivity" />
+        <activity android:name=".activities.InfoActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -49,6 +49,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
     </application>
 
 </manifest>
