@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class TrueFalseGameActivity extends AppCompatActivity {
     //declaration of variables for layout elements
     TextView trueFalseQuestion;
     Button trueFalseBtn1, trueFalseBtn2;
+    ImageView imgTrueFalse;
 
     //Firebase authentication object
     FirebaseAuth mAuth;
@@ -39,8 +41,10 @@ public class TrueFalseGameActivity extends AppCompatActivity {
         trueFalseQuestion = (TextView) findViewById(R.id.trueFalseQuestion);
         trueFalseBtn1 = (Button) findViewById(R.id.trueFalseBtn1);
         trueFalseBtn2 = (Button) findViewById(R.id.trueFalseBtn2);
+        imgTrueFalse = (ImageView) findViewById(R.id.imgTrueFalse);
 
         if (placeId.equals("6")) {
+            imgTrueFalse.setImageResource(R.drawable.game_6);
             trueFalseQuestion.setText("Can you change the password of your university’s user account in IT service desk?");
             trueFalseBtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,11 +64,11 @@ public class TrueFalseGameActivity extends AppCompatActivity {
         }
 
         if (placeId.equals("15")) {
+            imgTrueFalse.setImageResource(R.drawable.game_15);
             trueFalseQuestion.setText("Is Balance open at 16:00?");
             trueFalseBtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Toast.makeText(TrueFalseGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                 }
             });

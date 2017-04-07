@@ -46,24 +46,44 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
         boxImage = (ImageView) findViewById(R.id.boxImage);
         submitBtn = (Button) findViewById(R.id.submitBtn);
 
+        if (placeId.equals("5")) {
+            questionTV.setText("On what floor is AISEC office located?");
+            boxImage.setImageResource(R.drawable.game_5);
+
+            submitBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String str = answerET.getText().toString();
+                    if (str.equals("2")) {
+                        mReference.setValue("1");
+                        Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
+                        startActivity(map);
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
         if (placeId.equals("7")) {
             questionTV.setText("How many boxes are there inside Tellus Innovation Arena?");
             boxImage.setImageResource(R.drawable.game_7);
-        }
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String str = answerET.getText().toString();
-                if (str.equals("6")) {
-                    mReference.setValue("1");
-                    Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
-                    startActivity(map);
-                    Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
+            submitBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String str = answerET.getText().toString();
+                    if (str.equals("6")) {
+                        mReference.setValue("1");
+                        Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
+                        startActivity(map);
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
