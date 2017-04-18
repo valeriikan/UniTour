@@ -40,10 +40,14 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import fi.oulu.unitour.R;
 
@@ -223,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userId = mAuth.getCurrentUser().getUid();
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(firstname + " " + secondname);
-                        currentUserDb.child("completed").setValue("0");
+                        currentUserDb.child("imageUrl").setValue("https://firebasestorage.googleapis.com/v0/b/unitour-7b1ed.appspot.com/o/userimage.png?alt=media&token=e4a941cc-26a3-4484-9c7d-642524960872");
                         currentUserDb.child("score").setValue("0");
                         for (int i= 1; i<=MAX_LOCATIONS; i++) {currentUserDb.child("gamedata").child("loc"+i).setValue("0");}
 
@@ -278,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    // GOOGLE Sign In integration
+    // GOOGLE/FACEBOOK Sign In integration
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -316,11 +320,7 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(username);
                         currentUserDb.child("imageUrl").setValue(imageUrl);
-                        currentUserDb.child("completed").setValue("0");
-                        currentUserDb.child("score").setValue("0");
-                        for (int i= 1; i<=MAX_LOCATIONS; i++) {
-                            currentUserDb.child("gamedata").child("loc"+i).setValue("0");
-                        }
+                        recordUserData();
 
                         mProgress.dismiss();
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
@@ -365,11 +365,7 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseReference currentUserDb = mDatabase.child(userId);
                         currentUserDb.child("name").setValue(username);
                         currentUserDb.child("imageUrl").setValue(imageUrl);
-                        currentUserDb.child("completed").setValue("0");
-                        currentUserDb.child("score").setValue("0");
-                        for (int i= 1; i<=MAX_LOCATIONS; i++) {
-                            currentUserDb.child("gamedata").child("loc"+i).setValue("0");
-                        }
+                        recordUserData();
 
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -385,4 +381,27 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    private void recordUserData() {
+
+        String userId = mAuth.getCurrentUser().getUid();
+        final DatabaseReference mRef = mDatabase.child(userId);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, String> map = (Map) dataSnapshot.getValue();
+                String score = map.get("score");
+                if (score==null) {
+                    mRef.child("score").setValue("0");
+                    for (int i= 1; i<=MAX_LOCATIONS; i++) {
+                        mRef.child("gamedata").child("loc"+i).setValue("0");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

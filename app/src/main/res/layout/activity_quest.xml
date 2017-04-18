@@ -9,7 +9,9 @@
     <ImageView
         android:id="@+id/imgQuest"
         android:layout_width="match_parent"
-        android:layout_height="217dp" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:id="@+id/tvQuest"
