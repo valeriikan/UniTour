@@ -54,8 +54,9 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "2":
                 if (result.equals("sfw2017-unitour-tietotalo")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz1 = 1;
                     startActivity(game);
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
@@ -78,8 +79,9 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "4":
                 if (result.equals("sfw2017-unitour-sgo")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz2 = 1;
                     startActivity(game);
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
@@ -174,8 +176,9 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "12":
                 if (result.equals("sfw2017-unitour-aava")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz3 = 1;
                     startActivity(game);
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
@@ -222,8 +225,9 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
 
             case "16":
                 if (result.equals("sfw2017-unitour-facultyofeducation")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz4 = 1;
                     startActivity(game);
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
