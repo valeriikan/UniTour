@@ -22,83 +22,82 @@ import fi.oulu.unitour.R;
 public class PuzzleActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
-    ImageView puzzleImg1, puzzleImg2, puzzleImg3, puzzleImg4;
-    TextView puzzleText;
-    Button puzzleButton;
+    ImageView imgPuzzle1, imgPuzzle2, imgPuzzle3, imgPuzzle4;
+    TextView tvPuzzle;
+    Button btnPuzzle;
 
-    //Firebase authentication object
-    FirebaseAuth mAuth;
-    DatabaseReference locRef, scoreRef, completedRef;
-
-    public static int puz1 = 0;
-    public static int puz2 = 0;
-    public static int puz3 = 0;
-    public static int puz4 = 0;
+    String placeId, userId;
+    public static int puz1, puz2, puz3, puz4; //puzzle helper markers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
-        String placeId = getIntent().getStringExtra("LOCATION_ID");
-        //Firebase elements declaration
-        mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-        locRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userId).child("gamedata").child("loc"+placeId);
-        scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("score");
-        completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("completed");
+        //Firebase authentication object declaration
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        placeId = getIntent().getStringExtra("LOCATION_ID");
 
         //attaching layout elements to variables
-        puzzleImg1 = (ImageView) findViewById(R.id.puzzleImg1);
-        puzzleImg2 = (ImageView) findViewById(R.id.puzzleImg2);
-        puzzleImg3 = (ImageView) findViewById(R.id.puzzleImg3);
-        puzzleImg4 = (ImageView) findViewById(R.id.puzzleImg4);
-        puzzleText = (TextView) findViewById(R.id.puzzleText);
-        puzzleButton = (Button) findViewById(R.id.puzzleButton);
+        imgPuzzle1 = (ImageView) findViewById(R.id.imgPuzzle1);
+        imgPuzzle2 = (ImageView) findViewById(R.id.imgPuzzle2);
+        imgPuzzle3 = (ImageView) findViewById(R.id.imgPuzzle3);
+        imgPuzzle4 = (ImageView) findViewById(R.id.imgPuzzle4);
+        tvPuzzle = (TextView) findViewById(R.id.tvPuzzle);
+        btnPuzzle = (Button) findViewById(R.id.btnPuzzle);
 
-        if (puz1==1 && puz2==1 && puz3==1 && puz4==1) {
-            puzzleText.setText("Puzzle completed! Well done!");
-        }
-
+        //attaching images to imageViews according to puzzle piece status
         if (puz1 == 0) {
-            puzzleImg1.setImageResource(R.drawable.game_2_0);
+            imgPuzzle1.setImageResource(R.drawable.game_2_0);
         } else {
-            puzzleImg1.setImageResource(R.drawable.game_2_1);
+            imgPuzzle1.setImageResource(R.drawable.game_2_1);
         }
 
         if (puz2 == 0) {
-            puzzleImg2.setImageResource(R.drawable.game_4_0);
+            imgPuzzle2.setImageResource(R.drawable.game_4_0);
         } else {
-            puzzleImg2.setImageResource(R.drawable.game_4_1);
+            imgPuzzle2.setImageResource(R.drawable.game_4_1);
         }
 
         if (puz3 == 0) {
-            puzzleImg3.setImageResource(R.drawable.game_12_0);
+            imgPuzzle3.setImageResource(R.drawable.game_12_0);
         } else {
-            puzzleImg3.setImageResource(R.drawable.game_12_1);
+            imgPuzzle3.setImageResource(R.drawable.game_12_1);
         }
 
         if (puz4 == 0) {
-            puzzleImg4.setImageResource(R.drawable.game_16_0);
+            imgPuzzle4.setImageResource(R.drawable.game_16_0);
         } else {
-            puzzleImg4.setImageResource(R.drawable.game_16_1);
+            imgPuzzle4.setImageResource(R.drawable.game_16_1);
         }
 
-        puzzleButton.setOnClickListener(new View.OnClickListener() {
+        //change text if all the pieces are collected
+        if (puz1==1 && puz2==1 && puz3==1 && puz4==1) {
+            tvPuzzle.setText("Puzzle completed! Well done!");
+        }
+
+        //attaching listener to LogIn button
+        btnPuzzle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recordData();
                 Intent map = new Intent(PuzzleActivity.this, QuestMapActivity.class);
                 startActivity(map);
-                Toast.makeText(PuzzleActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                Toast.makeText(PuzzleActivity.this, "You gained 4 UniTour points! Keep collecting puzzle pieces", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
+    //method to update user game data
     private void recordData() {
-        locRef.setValue("1");
+        DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("gamedata").child("loc"+placeId);
+        DatabaseReference scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("score");
+        DatabaseReference completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("completed");
+        locRef.setValue(1);
         scoreRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {

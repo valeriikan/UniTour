@@ -23,10 +23,7 @@ public class YoutubeActivity extends AppCompatActivity {
     //declaration of variables for layout elements
     Button btnYoutube;
 
-    //Firebase authentication object
-    FirebaseAuth mAuth;
-    DatabaseReference locRef, scoreRef, completedRef;
-
+    String placeId, userId;
     public static String videoID;
 
     @Override
@@ -34,14 +31,10 @@ public class YoutubeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-        String placeId = getIntent().getStringExtra("LOCATION_ID");
-        //Firebase elements declaration
-        mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-        locRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userId).child("gamedata").child("loc"+placeId);
-        scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("score");
-        completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("completed");
+        //Firebase authentication object declaration
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        placeId = getIntent().getStringExtra("LOCATION_ID");
 
         switch (placeId) {
             case "9":
@@ -77,7 +70,13 @@ public class YoutubeActivity extends AppCompatActivity {
     }
 
     private void recordData() {
-        locRef.setValue("1");
+        DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("gamedata").child("loc"+placeId);
+        DatabaseReference scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("score");
+        DatabaseReference completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("completed");
+        locRef.setValue(1);
         scoreRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {

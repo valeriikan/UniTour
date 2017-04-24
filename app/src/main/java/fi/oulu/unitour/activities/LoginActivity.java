@@ -230,7 +230,7 @@ public class LoginActivity extends AppCompatActivity {
                         currentUserDb.child("imageUrl").setValue("https://firebasestorage.googleapis.com/v0/b/unitour-7b1ed.appspot.com/o/userimage.png?alt=media&token=e4a941cc-26a3-4484-9c7d-642524960872");
                         currentUserDb.child("completed").setValue(0);
                         currentUserDb.child("score").setValue(0);
-                        for (int i= 1; i<=MAX_LOCATIONS; i++) {currentUserDb.child("gamedata").child("loc"+i).setValue("0");}
+                        for (int i= 1; i<=MAX_LOCATIONS; i++) {currentUserDb.child("gamedata").child("loc"+i).setValue(0);}
 
                         Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         mProgress.dismiss();
@@ -395,7 +395,7 @@ public class LoginActivity extends AppCompatActivity {
                     mRef.child("completed").setValue(0);
                     mRef.child("score").setValue(0);
                     for (int i= 1; i<=MAX_LOCATIONS; i++) {
-                        mRef.child("gamedata").child("loc"+i).setValue("0");
+                        mRef.child("gamedata").child("loc"+i).setValue(0);
                     }
                 }
             }

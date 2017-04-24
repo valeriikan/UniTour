@@ -70,8 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
                 int score = dataSnapshot.child("score").getValue(int.class);
                 int completed = dataSnapshot.child("completed").getValue(int.class);
                 tvMainName.setText(name);
-                tvUnitourScore.setText(score);
-                tvCheckpoints.setText(completed);
+                tvUnitourScore.setText(String.valueOf(score));
+                tvCheckpoints.setText(String.valueOf(completed));
                 Picasso.with(ProfileActivity.this).load(imageUrl).fit().centerCrop()
                         .transform(new CircleTransform()).into(mainUserpic, callback);
             }

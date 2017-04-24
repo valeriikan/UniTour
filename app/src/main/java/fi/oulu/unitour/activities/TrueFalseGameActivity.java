@@ -26,23 +26,17 @@ public class TrueFalseGameActivity extends AppCompatActivity {
     Button trueFalseBtn1, trueFalseBtn2;
     ImageView imgTrueFalse;
 
-    //Firebase authentication object
-    FirebaseAuth mAuth;
-    DatabaseReference locRef, scoreRef, completedRef;
+    String placeId, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_true_false_game);
 
-        String placeId = getIntent().getStringExtra("LOCATION_ID");
-        //Firebase elements declaration
-        mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-        locRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child(userId).child("gamedata").child("loc"+placeId);
-        scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("score");
-        completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("completed");
+        //Firebase authentication object declaration
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        placeId = getIntent().getStringExtra("LOCATION_ID");
 
         trueFalseQuestion = (TextView) findViewById(R.id.trueFalseQuestion);
         trueFalseBtn1 = (Button) findViewById(R.id.trueFalseBtn1);
@@ -91,7 +85,13 @@ public class TrueFalseGameActivity extends AppCompatActivity {
     }
 
     private void recordData() {
-        locRef.setValue("1");
+        DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("gamedata").child("loc"+placeId);
+        DatabaseReference scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("score");
+        DatabaseReference completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("completed");
+        locRef.setValue(1);
         scoreRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
