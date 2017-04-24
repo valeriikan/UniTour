@@ -17,8 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.Map;
-
 import fi.oulu.unitour.R;
 import fi.oulu.unitour.helpers.CircleTransform;
 
@@ -27,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     //declaration of variables for layout elements
     RelativeLayout profileContent;
     ProgressBar profileLoading;
-    TextView tvMainName;
+    TextView tvMainName, tvUnitourScore, tvCheckpoints;
     ImageView mainUserpic;
 
     //Firebase authentication objects
@@ -43,6 +41,8 @@ public class ProfileActivity extends AppCompatActivity {
         profileContent = (RelativeLayout) findViewById(R.id.profileContent);
         profileLoading = (ProgressBar) findViewById(R.id.profileLoading);
         tvMainName = (TextView) findViewById(R.id.tvProfileName);
+        tvUnitourScore = (TextView) findViewById(R.id.tvUnitourScore);
+        tvCheckpoints = (TextView) findViewById(R.id.tvCheckpoints);
         mainUserpic = (ImageView) findViewById(R.id.profileUserpic);
         mainUserpic.setImageResource(R.drawable.ui_applogo);
 
@@ -65,10 +65,13 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = (Map) dataSnapshot.getValue();
-                String name = map.get("name");
-                String imageUrl = map.get("imageUrl");
+                String name = dataSnapshot.child("name").getValue(String.class);
+                String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
+                int score = dataSnapshot.child("score").getValue(int.class);
+                int completed = dataSnapshot.child("completed").getValue(int.class);
                 tvMainName.setText(name);
+                tvUnitourScore.setText(score);
+                tvCheckpoints.setText(completed);
                 Picasso.with(ProfileActivity.this).load(imageUrl).fit().centerCrop()
                         .transform(new CircleTransform()).into(mainUserpic, callback);
             }

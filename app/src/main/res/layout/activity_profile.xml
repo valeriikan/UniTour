@@ -48,25 +48,65 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvCheckpoints"
+        <LinearLayout
+            android:id="@+id/layoutProfileCheckpoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/layoutProfileWelcome"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp"
-            android:text="You completed 0 checkpoints"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/layoutProfileWelcome"
+            android:layout_centerHorizontal="true">
 
-        <TextView
-            android:id="@+id/tvUnitourScore"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="You completed "/>
+
+            <TextView
+                android:id="@+id/tvCheckpoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text=" of 16 checkpoints"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutProfileScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tvCheckpoints"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp"
-            android:text="UniTour score: 0 points"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/layoutProfileCheckpoints"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="UniTour score: "/>
+
+            <TextView
+                android:id="@+id/tvUnitourScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text=" points"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

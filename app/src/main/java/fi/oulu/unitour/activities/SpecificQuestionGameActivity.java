@@ -11,8 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 import fi.oulu.unitour.R;
 
@@ -26,7 +30,7 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
 
     //Firebase authentication object
     FirebaseAuth mAuth;
-    DatabaseReference mReference;
+    DatabaseReference locRef, scoreRef, completedRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +41,10 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
         //Firebase elements declaration
         mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
-        mReference = FirebaseDatabase.getInstance().getReference()
+        locRef = FirebaseDatabase.getInstance().getReference()
                 .child("users").child(userId).child("gamedata").child("loc"+placeId);
+        scoreRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("score");
+        completedRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("completed");
 
         //attaching layout elements to variables
         questionTV = (TextView) findViewById(R.id.questionTV);
@@ -55,7 +61,7 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("2")) {
-                        mReference.setValue("1");
+                        recordData();
                         Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
                         Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
@@ -75,7 +81,7 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("6")) {
-                        mReference.setValue("1");
+                        recordData();
                         Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
                         Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
@@ -85,5 +91,41 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 }
             });
         }
+    }
+
+    private void recordData() {
+        locRef.setValue("1");
+        scoreRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                } else {
+                    int score = mutableData.getValue(int.class) + 8;
+                    mutableData.setValue(score);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+            }
+        });
+        completedRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() == null) {
+                } else {
+                    int completed = mutableData.getValue(int.class) + 1;
+                    mutableData.setValue(completed);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+            }
+        });
     }
 }
