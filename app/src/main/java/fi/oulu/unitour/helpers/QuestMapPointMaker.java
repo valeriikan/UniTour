@@ -18,7 +18,7 @@ import java.util.Map;
 import fi.oulu.unitour.R;
 import fi.oulu.unitour.activities.PuzzleActivity;
 
-public class QuestPointMaker {
+public class QuestMapPointMaker {
 
     // amount of total checkpoints
     private static final int LOCATION_NUMBERS = 16;
@@ -55,7 +55,7 @@ public class QuestPointMaker {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public QuestPointMaker() {
+    public QuestMapPointMaker() {
         // get user's gamedata link
         mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
@@ -64,12 +64,11 @@ public class QuestPointMaker {
 
     private Marker addMarker(GoogleMap map, LatLng coordination, String title, String snippet, BitmapDescriptor icon) {
 
-        final Marker locMarker = map.addMarker(new MarkerOptions()
+        return map.addMarker(new MarkerOptions()
                 .position(coordination)
                 .title(title)
                 .snippet(snippet)
                 .icon(icon));
-        return locMarker;
     }
 
     public Marker[] addCheckpoints(final GoogleMap map) {
@@ -80,7 +79,7 @@ public class QuestPointMaker {
                 Map<String, Long> firebaseMap = (Map) dataSnapshot.getValue();
 
                 for (int i = 0; i<LOCATION_NUMBERS; i++) {
-                    int pos= i+1;
+                    int pos = i+1;
                     Long status = firebaseMap.get("loc" + pos);
                     LatLng ltlg = checkpoints[i];
                     String id = String.valueOf(pos);

@@ -26,52 +26,29 @@ public class ExploreActivity extends AppCompatActivity{
     //declaration of variables for layout elements
     TextView locDescripTxt;
     ImageView locImageIV;
-    ProgressBar loadingBar;
 
-    //Firebase authentication objects
-    DatabaseReference mDatabase;
+    String placeId;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
         //attaching layout elements to variables
         locDescripTxt = (TextView) findViewById(R.id.locDescripTxt);
         locImageIV = (ImageView) findViewById(R.id.locImageIV);
-        loadingBar = (ProgressBar) findViewById(R.id.loadingBar);
 
-        //retrieving place data from Firebase database
-        String placeId = getIntent().getStringExtra("LOCATION_ID");
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("locations").child(placeId);
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = (Map) dataSnapshot.getValue();
-                String name = map.get("name");
-                String description = map.get("description");
-                String imageUrl = map.get("imageUrl");
-                setTitle(name);
-                locDescripTxt.setText(description);
+        //getting values according to place id
+        placeId = getIntent().getStringExtra("LOCATION_ID");
+        int titleId = getResources().getIdentifier("loc_name_" + placeId, "string", getPackageName());
+        int descriptionId = getResources().getIdentifier("loc_description_" + placeId, "string", getPackageName());
+        int imgId = getResources().getIdentifier("location_" + placeId, "drawable", getPackageName());
+        String description = getString(descriptionId);
+        String title = getString(titleId);
 
-                Callback loadingCallback = new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        loadingBar.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onError() {
-                    }
-                };
-
-                Picasso.with(ExploreActivity.this).load(imageUrl).fit().centerCrop().into(locImageIV, loadingCallback);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        //applying values to layout elements
+        setTitle(title);
+        locDescripTxt.setText(description);
+        locImageIV.setImageResource(imgId);
     }
 }

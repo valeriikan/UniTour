@@ -24,7 +24,7 @@ import com.google.android.gms.maps.GoogleMap.OnGroundOverlayClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 import fi.oulu.unitour.R;
-import fi.oulu.unitour.helpers.MapLocationMaker;
+import fi.oulu.unitour.helpers.ExploreMapPointMaker;
 
 public class ExploreMapActivity extends AppCompatActivity
         implements OnMapReadyCallback, OnMarkerClickListener, OnGroundOverlayClickListener {
@@ -42,6 +42,7 @@ public class ExploreMapActivity extends AppCompatActivity
                     .tilt(30)
                     .build();
 
+    //set of checkpoints markers
     Marker[] uniCheckpoints;
 
     @Override
@@ -65,11 +66,10 @@ public class ExploreMapActivity extends AppCompatActivity
         campusMap.setOnMarkerClickListener(this);
 
         //adds markers to map to show the checkpoints meaning different locations and levels
-        MapLocationMaker uniCheckpointMaker = new MapLocationMaker();
+        ExploreMapPointMaker uniCheckpointMaker = new ExploreMapPointMaker();
         uniCheckpoints = uniCheckpointMaker.addCheckpoints(campusMap);
 
         //Adding ground overlay to google map on university of Oulu LatLng
-        //LatLng uniCentre = new LatLng(65.0593, 25.4663);
         GroundOverlayOptions overlayOptions = new GroundOverlayOptions()
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.map))
                 .positionFromBounds(uniBound);
@@ -78,8 +78,8 @@ public class ExploreMapActivity extends AppCompatActivity
 
         campusMap.animateCamera(CameraUpdateFactory.newCameraPosition(uniOulu));
 
-        //if the user grants the application his location access, the maps automatically adds user's location on the top right position
-        //of the map and user can clicks on it and see his current location, otherwise no
+        //if the user grants the application his location access, the maps automatically adds user's location
+        //on the top right position of the map and user can clicks on it and see his current location, otherwise no
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             campusMap.setMyLocationEnabled(true);
