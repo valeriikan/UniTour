@@ -1,5 +1,6 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +46,13 @@ public class ProfileActivity extends AppCompatActivity {
         tvCheckpoints = (TextView) findViewById(R.id.tvCheckpoints);
         mainUserpic = (ImageView) findViewById(R.id.profileUserpic);
         mainUserpic.setImageResource(R.drawable.ui_applogo);
+        mainUserpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, RewardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 

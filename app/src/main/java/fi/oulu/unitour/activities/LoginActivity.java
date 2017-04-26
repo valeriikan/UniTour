@@ -389,8 +389,8 @@ public class LoginActivity extends AppCompatActivity {
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = (Map) dataSnapshot.getValue();
-                String score = map.get("score");
+                Map<String, Long> map = (Map) dataSnapshot.getValue();
+                Long score = map.get("score");
                 if (score==null) {
                     mRef.child("completed").setValue(0);
                     mRef.child("score").setValue(0);
