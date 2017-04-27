@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class TrueFalseGameActivity extends AppCompatActivity {
 
@@ -44,7 +46,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
         imgTrueFalse = (ImageView) findViewById(R.id.imgTrueFalse);
 
         if (placeId.equals("6")) {
-            imgTrueFalse.setImageResource(R.drawable.game_6);
+            Picasso.with(TrueFalseGameActivity.this).load(R.drawable.game_6).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,10)).into(imgTrueFalse);
             trueFalseQuestion.setText("Can you change the password of your university’s user account in IT service desk?");
             trueFalseBtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -52,7 +55,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
                     recordData();
                     Intent map = new Intent(TrueFalseGameActivity.this, QuestMapActivity.class);
                     startActivity(map);
-                    Toast.makeText(TrueFalseGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    finish();
+                    Toast.makeText(TrueFalseGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                 }
             });
             trueFalseBtn2.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +68,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
         }
 
         if (placeId.equals("15")) {
-            imgTrueFalse.setImageResource(R.drawable.game_15);
+            Picasso.with(TrueFalseGameActivity.this).load(R.drawable.game_15).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,10)).into(imgTrueFalse);
             trueFalseQuestion.setText("Is Balance open at 16:00?");
             trueFalseBtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +83,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
                     recordData();
                     Intent map = new Intent(TrueFalseGameActivity.this, QuestMapActivity.class);
                     startActivity(map);
-                    Toast.makeText(TrueFalseGameActivity.this, "Correct answer! Balance closes at 13:30. You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    finish();
+                    Toast.makeText(TrueFalseGameActivity.this, "Correct answer! Balance closes at 13:30. You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                 }
             });
         }

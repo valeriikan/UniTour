@@ -17,8 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class SpecificQuestionGameActivity extends AppCompatActivity{
 
@@ -48,7 +50,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
 
         if (placeId.equals("5")) {
             questionTV.setText("On what floor is AISEC office located?");
-            boxImage.setImageResource(R.drawable.game_5);
+            Picasso.with(SpecificQuestionGameActivity.this).load(R.drawable.game_5).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(boxImage);
+
 
             submitBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,7 +61,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                         recordData();
                         Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
-                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                        finish();
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                     }
@@ -68,7 +72,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
 
         if (placeId.equals("7")) {
             questionTV.setText("How many boxes are there inside Tellus Innovation Arena?");
-            boxImage.setImageResource(R.drawable.game_7);
+            Picasso.with(SpecificQuestionGameActivity.this).load(R.drawable.game_7).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(boxImage);
+
 
             submitBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +83,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                         recordData();
                         Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
-                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                        finish();
+                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                     }

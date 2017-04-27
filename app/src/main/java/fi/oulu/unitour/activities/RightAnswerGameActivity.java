@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class RightAnswerGameActivity extends AppCompatActivity {
 
@@ -46,7 +48,7 @@ public class RightAnswerGameActivity extends AppCompatActivity {
         imgRightAnswer = (ImageView) findViewById(R.id.imgRightAnswer);
 
         if (placeId.equals("3")) {
-            imgRightAnswer.setImageResource(R.drawable.game_3);
+            Picasso.with(RightAnswerGameActivity.this).load(R.drawable.game_3).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(imgRightAnswer);
             rightAnswerQuestion.setText("Which one we cannot order at Datagarage?");
             rightAnswerBtn1.setText("Tea");
             rightAnswerBtn2.setText("Cofee");
@@ -65,14 +67,15 @@ public class RightAnswerGameActivity extends AppCompatActivity {
                     recordData();
                     Intent map = new Intent(RightAnswerGameActivity.this, QuestMapActivity.class);
                     startActivity(map);
-                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    finish();
+                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour point", Toast.LENGTH_LONG).show();
 
                 }
             });
         }
 
         if (placeId.equals("8")) {
-            imgRightAnswer.setImageResource(R.drawable.game_8);
+            Picasso.with(RightAnswerGameActivity.this).load(R.drawable.game_8).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(imgRightAnswer);
             rightAnswerQuestion.setText("On which day is Fablab open to the public?");
             rightAnswerBtn1.setText("Monday");
             rightAnswerBtn2.setText("Wednesday");
@@ -85,6 +88,7 @@ public class RightAnswerGameActivity extends AppCompatActivity {
                     recordData();
                     Intent map = new Intent(RightAnswerGameActivity.this, QuestMapActivity.class);
                     startActivity(map);
+                    finish();
                     Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
 
                 }

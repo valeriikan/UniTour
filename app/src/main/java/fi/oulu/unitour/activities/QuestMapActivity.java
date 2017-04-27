@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -73,6 +74,24 @@ public class QuestMapActivity extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mapClick = (Map) dataSnapshot.getValue();
+                int sum = 0;
+                for (int i=1;i<17;i++) {
+                    int value = dataSnapshot.child("loc"+i).getValue(int.class);
+                    sum = sum + value;
+                }
+
+                Log.wtf("myTag", String.valueOf(sum));
+
+                if (sum == 16) {
+                    Intent intent = new Intent(QuestMapActivity.this, RewardActivity.class);
+                    startActivity(intent);
+                }
+                /*int completed = dataSnapshot.child("completed").getValue(int.class);
+                if (completed==16) {
+                    Intent intent = new Intent(QuestMapActivity.this, RewardActivity.class);
+                    startActivity(intent);
+                }*/
+
             }
 
             @Override

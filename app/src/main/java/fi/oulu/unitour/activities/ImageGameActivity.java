@@ -139,6 +139,7 @@ public class ImageGameActivity extends AppCompatActivity {
                         recordData();
                         Intent map = new Intent(ImageGameActivity.this, QuestMapActivity.class);
                         startActivity(map);
+                        finish();
                         Toast.makeText(ImageGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                         break;
                 }
