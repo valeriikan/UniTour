@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
     RelativeLayout profileContent;
     ProgressBar profileLoading;
     TextView tvMainName, tvUnitourScore, tvCheckpoints;
-    ImageView mainUserpic;
+    ImageView mainUserpic, imgProfileBackground;
 
     //Firebase authentication objects
     FirebaseAuth mAuth;
@@ -44,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvMainName = (TextView) findViewById(R.id.tvProfileName);
         tvUnitourScore = (TextView) findViewById(R.id.tvUnitourScore);
         tvCheckpoints = (TextView) findViewById(R.id.tvCheckpoints);
+        imgProfileBackground = (ImageView) findViewById(R.id.imgProfileBackground);
+        imgProfileBackground.setImageResource(R.drawable.ui_profile_background);
         mainUserpic = (ImageView) findViewById(R.id.profileUserpic);
         mainUserpic.setImageResource(R.drawable.ui_applogo);
         mainUserpic.setOnClickListener(new View.OnClickListener() {

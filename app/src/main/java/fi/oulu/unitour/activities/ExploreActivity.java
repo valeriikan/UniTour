@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.bluejamesbond.text.DocumentView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,11 +21,12 @@ import com.squareup.picasso.Picasso;
 import java.util.Map;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class ExploreActivity extends AppCompatActivity{
 
     //declaration of variables for layout elements
-    TextView locDescripTxt;
+    DocumentView textExplore;
     ImageView locImageIV;
 
     String placeId;
@@ -35,7 +37,7 @@ public class ExploreActivity extends AppCompatActivity{
         setContentView(R.layout.activity_explore);
 
         //attaching layout elements to variables
-        locDescripTxt = (TextView) findViewById(R.id.locDescripTxt);
+        textExplore = (DocumentView) findViewById(R.id.textExplore);
         locImageIV = (ImageView) findViewById(R.id.locImageIV);
 
         //getting values according to place id
@@ -48,7 +50,7 @@ public class ExploreActivity extends AppCompatActivity{
 
         //applying values to layout elements
         setTitle(title);
-        locDescripTxt.setText(description);
-        locImageIV.setImageResource(imgId);
+        textExplore.setText(description);
+        Picasso.with(ExploreActivity.this).load(imgId).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(locImageIV);
     }
 }

@@ -3,7 +3,6 @@ package fi.oulu.unitour.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,8 +16,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class ImageGameActivity extends AppCompatActivity {
 
@@ -57,18 +58,26 @@ public class ImageGameActivity extends AppCompatActivity {
         imageButton = (Button) findViewById(R.id.imageButton);
 
         if (placeId.equals("1")) {
-            img1.setImageResource(R.drawable.game_1_1);
-            img2.setImageResource(R.drawable.game_1_2);
-            img3.setImageResource(R.drawable.game_1_3);
-            img4.setImageResource(R.drawable.game_1_4);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_1_1).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img1);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_1_2).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img2);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_1_3).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img3);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_1_4).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img4);
             question.setText("Which artwork is in Kastari?");
         }
 
         if (placeId.equals("13")) {
-            img1.setImageResource(R.drawable.game_13_1);
-            img2.setImageResource(R.drawable.game_13_2);
-            img3.setImageResource(R.drawable.game_13_3);
-            img4.setImageResource(R.drawable.game_13_4);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_13_1).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img1);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_13_2).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img2);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_13_3).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img3);
+            Picasso.with(ImageGameActivity.this).load(R.drawable.game_13_4).fit().centerCrop()
+                    .transform(new RoundedCornersTransform(50,0)).into(img4);
             question.setText("Which of the following animals doesn’t belong to the Zoological Museum?");
         }
 

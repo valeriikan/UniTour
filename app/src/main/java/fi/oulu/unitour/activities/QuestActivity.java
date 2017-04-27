@@ -8,21 +8,22 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bluejamesbond.text.DocumentView;
+import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.RoundedCornersTransform;
 
 public class QuestActivity extends AppCompatActivity {
 
     //declaration of variables for layout elements
     ImageView imgQuest;
-    TextView tvQuest;
+    DocumentView textQuest;
     Button btnScanQR;
     String placeId;
 
@@ -33,8 +34,8 @@ public class QuestActivity extends AppCompatActivity {
 
         //attaching layout elements to variables
         imgQuest = (ImageView) findViewById(R.id.imgQuest);
-        tvQuest = (TextView) findViewById(R.id.tvQuest);
         btnScanQR = (Button) findViewById(R.id.btnScanQR);
+        textQuest = (DocumentView) findViewById(R.id.textQuest);
 
         //getting values according to place id
         placeId = getIntent().getStringExtra("LOCATION_ID");
@@ -46,8 +47,8 @@ public class QuestActivity extends AppCompatActivity {
 
         //applying values to layout elements
         setTitle(title);
-        tvQuest.setText(description);
-        imgQuest.setImageResource(imgId);
+        textQuest.setText(description);
+        Picasso.with(QuestActivity.this).load(imgId).fit().centerCrop().transform(new RoundedCornersTransform(50,10)).into(imgQuest);
 
         //scan button
         btnScanQR.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +77,7 @@ public class QuestActivity extends AppCompatActivity {
                     intent.putExtra("LOCATION_ID", placeId);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(QuestActivity.this, "You cannot continue the quest because you have denied access to device camera. Now you can update it manually in application settings", Toast.LENGTH_SHORT);
+                    Toast.makeText(QuestActivity.this, "You cannot continue the quest because you have denied access to device camera. Now you can update it manually in application settings", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }

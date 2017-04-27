@@ -1,43 +1,44 @@
 package fi.oulu.unitour.helpers;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 
-import com.squareup.picasso.Transformation;
+// enables hardware accelerated rounded corners
+public class RoundedCornersTransform implements com.squareup.picasso.Transformation {
+    private final int radius;
+    private final int margin;  // dp
 
+    // radius is corner radii in dp
+    // margin is the board in dp
+    public RoundedCornersTransform(final int radius, final int margin) {
+        this.radius = radius;
+        this.margin = margin;
+    }
 
-public class RoundedCornersTransform implements Transformation {
     @Override
-    public Bitmap transform(Bitmap source) {
-        int size = Math.min(source.getWidth(), source.getHeight());
+    public Bitmap transform(final Bitmap source) {
+        final Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
 
-        int x = (source.getWidth() - size) / 2;
-        int y = (source.getHeight() - size) / 2;
+        Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        canvas.drawRoundRect(new RectF(margin, margin, source.getWidth() - margin, source.getHeight() - margin), radius, radius, paint);
 
-        Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-        if (squaredBitmap != source) {
+        if (source != output) {
             source.recycle();
         }
 
-        Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
-        BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
-        paint.setShader(shader);
-        paint.setAntiAlias(true);
-
-        float r = size / 8f;
-        canvas.drawRoundRect(new RectF(0, 0, source.getWidth(), source.getHeight()), r, r, paint);
-        squaredBitmap.recycle();
-        return bitmap;
+        return output;
     }
 
     @Override
     public String key() {
-        return "rounded_corners";
+        return "rounded";
     }
 }
