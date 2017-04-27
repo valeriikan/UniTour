@@ -1,10 +1,15 @@
 package fi.oulu.unitour.activities;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -93,16 +98,30 @@ public class RewardActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storeImage(getScreenshot(layoutScreenshot));
-                Toast.makeText(RewardActivity.this, "Reward image is saved to yours device. You can find it in Galery app or in Screenshot folder", Toast.LENGTH_SHORT).show();
+                if (ContextCompat.checkSelfPermission(RewardActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        + ContextCompat.checkSelfPermission(RewardActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    storeImage(getScreenshot(layoutScreenshot));
+                    Toast.makeText(RewardActivity.this, "Reward image is saved to yours device. You can find it in Galery app or in Screenshot folder", Toast.LENGTH_SHORT).show();
+                } else {
+                    ActivityCompat.requestPermissions(RewardActivity.this, new String[]
+                            {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                }
             }
         });
 
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storeImage(getScreenshot(layoutScreenshot));
-                shareImage();
+                if (ContextCompat.checkSelfPermission(RewardActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        + ContextCompat.checkSelfPermission(RewardActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    storeImage(getScreenshot(layoutScreenshot));
+                    shareImage();
+                } else {
+                    ActivityCompat.requestPermissions(RewardActivity.this, new String[]
+                            {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                }
             }
         });
     }
@@ -145,6 +164,37 @@ public class RewardActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(intent, "Share your reward!"));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(RewardActivity.this, "No App Available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case 1:
+                if (grantResults.length > 0) {
+                    boolean readPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writePermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (readPermission && writePermission) {
+                        storeImage(getScreenshot(layoutScreenshot));
+                        Toast.makeText(RewardActivity.this, "Reward image is saved to yours device. You can find it in Galery app or in Screenshot folder", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(RewardActivity.this, "You cannot save the image because you have not provide permissions. Now you can update it manually in application settings", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0) {
+                    boolean readPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writePermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (readPermission && writePermission) {
+                        storeImage(getScreenshot(layoutScreenshot));
+                        shareImage();
+                    } else {
+                        Toast.makeText(RewardActivity.this, "You cannot share the image because you have not provide permissions. Now you can update it manually in application settings", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
         }
     }
 }
