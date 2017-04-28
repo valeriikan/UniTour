@@ -98,4 +98,11 @@
         Education.\nMore info in English http://www.oulu.fi/edu/admissions\nMore info in Finnish
         http://www.oulu.fi/ktk/opiskelijavalinta</string>
 
+    <string name="noInternet">Your internet connection is turned off</string>
+
+    <string name="infoActivity">UniTour application is created to help guests and visitors of the University of Oulu
+        to get acquainted with the most significant locations of the campus. Sign up to play a QR quest or just explore
+        the university map without any registration.\n\nCreated by Team A for the Software Factory Project course in 2017.
+        \n\nhttp://unitour.000webhostapp.com/</string>
+
 </resources>

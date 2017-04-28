@@ -1,8 +1,11 @@
 package fi.oulu.unitour.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -144,9 +147,13 @@ public class QuestMapActivity extends AppCompatActivity
         String position = marker.getSnippet();
         Long status = mapClick.get("loc" + position);
         if (status==0) {
-            Intent quest = new Intent(this,QuestActivity.class);
-            quest.putExtra("LOCATION_ID",position);
-            startActivity(quest);
+            if (isOnline()) {
+                Intent quest = new Intent(this,QuestActivity.class);
+                quest.putExtra("LOCATION_ID",position);
+                startActivity(quest);
+            } else {
+                Toast.makeText(QuestMapActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+            }
             return true;
         } else {
             Toast.makeText(QuestMapActivity.this, "You have already completed this checkpoint", Toast.LENGTH_SHORT).show();
@@ -190,5 +197,12 @@ public class QuestMapActivity extends AppCompatActivity
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

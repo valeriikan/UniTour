@@ -1,7 +1,10 @@
 package fi.oulu.unitour.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -146,15 +149,24 @@ public class LoginActivity extends AppCompatActivity {
         imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance()
-                        .logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+                if (isOnline()) {
+                    LoginManager.getInstance()
+                            .logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgress = ProgressDialog.show(LoginActivity.this, "Please wait...",null,true,true);
-                googleSignIn();
+                if (isOnline()) {
+                    mProgress = ProgressDialog.show(LoginActivity.this, "Please wait...",null,true,true);
+                    googleSignIn();
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -192,7 +204,12 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                emailSignup();
+                if (isOnline()) {
+                    emailSignup();
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -200,7 +217,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               emailLogin();
+                if (isOnline()) {
+                    emailLogin();
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -405,5 +426,12 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

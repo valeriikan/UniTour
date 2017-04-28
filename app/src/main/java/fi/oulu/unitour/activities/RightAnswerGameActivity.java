@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -68,10 +71,13 @@ public class RightAnswerGameActivity extends AppCompatActivity {
             rightAnswerBtn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    rightAnswerBtn4.setEnabled(false);
-                    recordData();
-                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
-
+                    if (isOnline()) {
+                        rightAnswerBtn4.setEnabled(false);
+                        recordData();
+                        Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(RightAnswerGameActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -87,10 +93,13 @@ public class RightAnswerGameActivity extends AppCompatActivity {
             rightAnswerBtn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    rightAnswerBtn3.setEnabled(false);
-                    recordData();
-                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour point", Toast.LENGTH_LONG).show();
-
+                    if (isOnline()) {
+                        rightAnswerBtn3.setEnabled(false);
+                        recordData();
+                        Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour point", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(RightAnswerGameActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             rightAnswerBtn4.setOnClickListener(new View.OnClickListener() {
@@ -191,5 +200,12 @@ public class RightAnswerGameActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

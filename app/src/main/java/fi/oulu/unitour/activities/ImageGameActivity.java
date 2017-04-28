@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -140,9 +143,13 @@ public class ImageGameActivity extends AppCompatActivity {
                         Toast.makeText(ImageGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        imageButton.setEnabled(false);
-                        recordData();
-                        Toast.makeText(ImageGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        if (isOnline()) {
+                            imageButton.setEnabled(false);
+                            recordData();
+                            Toast.makeText(ImageGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ImageGameActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
             }
@@ -225,5 +232,12 @@ public class ImageGameActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

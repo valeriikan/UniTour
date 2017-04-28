@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -66,9 +69,13 @@ public class YoutubeActivity extends AppCompatActivity {
         btnYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnYoutube.setEnabled(false);
-                recordData();
-                Toast.makeText(YoutubeActivity.this, "You gained 5 UniTour points", Toast.LENGTH_LONG).show();
+                if (isOnline()) {
+                    btnYoutube.setEnabled(false);
+                    recordData();
+                    Toast.makeText(YoutubeActivity.this, "You gained 5 UniTour points", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(YoutubeActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -148,5 +155,12 @@ public class YoutubeActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

@@ -18,15 +18,10 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
+        android:id="@+id/tvInfoActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/infoApplogo"
-        android:layout_marginTop="15dp"
-        android:text="UniTour application is created to help you to get acquainted with the University of Oulu.
-Sign up to play a QR quest or just explore the university map without any registration.
-
-Created by Team A for Sowtfare Factory course 2017.
-
-https://github.com/valeriikan/UniTour/"/>
+        android:layout_marginTop="50dp" />
 
 </RelativeLayout>

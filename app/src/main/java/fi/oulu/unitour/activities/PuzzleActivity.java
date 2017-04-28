@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -85,9 +88,13 @@ public class PuzzleActivity extends AppCompatActivity {
         btnPuzzle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnPuzzle.setEnabled(false);
-                recordData();
-                Toast.makeText(PuzzleActivity.this, "You gained 4 UniTour points! Keep collecting puzzle pieces", Toast.LENGTH_LONG).show();
+                if (isOnline()) {
+                    btnPuzzle.setEnabled(false);
+                    recordData();
+                    Toast.makeText(PuzzleActivity.this, "You gained 4 UniTour points! Keep collecting puzzle pieces", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(PuzzleActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -168,5 +175,12 @@ public class PuzzleActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

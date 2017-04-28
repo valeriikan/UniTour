@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -62,9 +65,13 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("2")) {
-                        submitBtn.setEnabled(false);
-                        recordData();
-                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        if (isOnline()) {
+                            submitBtn.setEnabled(false);
+                            recordData();
+                            Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(SpecificQuestionGameActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                     }
@@ -82,9 +89,13 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("6")) {
-                        submitBtn.setEnabled(false);
-                        recordData();;
-                        Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        if (isOnline()) {
+                            submitBtn.setEnabled(false);
+                            recordData();;
+                            Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(SpecificQuestionGameActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                     }
@@ -168,5 +179,12 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }
