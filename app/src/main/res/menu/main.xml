@@ -6,9 +6,4 @@
         android:orderInCategory="100"
         android:title="Log out"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_exit"
-        android:orderInCategory="100"
-        android:title="Exit"
-        app:showAsAction="never" />
 </menu>

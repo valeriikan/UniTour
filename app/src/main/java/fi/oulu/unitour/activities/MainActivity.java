@@ -85,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
-            case R.id.action_exit:
-                // close app
-                finish();
-                System.exit(0);
         }
         return super.onOptionsItemSelected(item);
     }

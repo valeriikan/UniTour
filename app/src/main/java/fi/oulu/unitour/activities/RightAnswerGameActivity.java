@@ -3,6 +3,8 @@ package fi.oulu.unitour.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,13 +32,15 @@ public class RightAnswerGameActivity extends AppCompatActivity {
 
     String placeId, userId;
 
+    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_right_answer_game);
 
         //Firebase authentication object declaration
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
         placeId = getIntent().getStringExtra("LOCATION_ID");
 
@@ -163,5 +167,29 @@ public class RightAnswerGameActivity extends AppCompatActivity {
         map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(map);
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // menu items
+        switch (id) {
+            case R.id.action_logout:
+                // sign out
+                mAuth.signOut();
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, WelcomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

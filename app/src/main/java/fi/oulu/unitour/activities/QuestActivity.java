@@ -8,12 +8,15 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bluejamesbond.text.DocumentView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import fi.oulu.unitour.R;
@@ -27,10 +30,16 @@ public class QuestActivity extends AppCompatActivity {
     Button btnScanQR;
     String placeId;
 
+    //Firebase authentication objects
+    FirebaseAuth mAuth;
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_quest);
+
+        //Firebase elements declaration
+        mAuth = FirebaseAuth.getInstance();
 
         //attaching layout elements to variables
         imgQuest = (ImageView) findViewById(R.id.imgQuest);
@@ -82,5 +91,29 @@ public class QuestActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // menu items
+        switch (id) {
+            case R.id.action_logout:
+                // sign out
+                mAuth.signOut();
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, WelcomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
