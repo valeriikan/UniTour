@@ -1,4 +1,4 @@
-package fi.oulu.unitour.activities;
+package fi.oulu.unitour.helpers;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +14,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.activities.YoutubeActivity;
 
 import static com.google.android.youtube.player.YouTubePlayer.PlayerStyle.DEFAULT;
 

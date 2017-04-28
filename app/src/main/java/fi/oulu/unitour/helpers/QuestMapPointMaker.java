@@ -3,7 +3,10 @@ package fi.oulu.unitour.helpers;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,8 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.activities.PuzzleActivity;
 
-public class QuestPointMaker {
+public class QuestMapPointMaker {
 
     // amount of total checkpoints
     private static final int LOCATION_NUMBERS = 16;
@@ -50,11 +54,15 @@ public class QuestPointMaker {
     private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_redstar);
     private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_completed);
 
+    private LatLngBounds uniBound = new LatLngBounds(
+            new LatLng(65.056704, 25.463102),       // South west corner
+            new LatLng(65.061842, 25.470193));      // North east corner
+
     //Firebase authentication objects
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public QuestPointMaker() {
+    public QuestMapPointMaker() {
         // get user's gamedata link
         mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
@@ -63,40 +71,49 @@ public class QuestPointMaker {
 
     private Marker addMarker(GoogleMap map, LatLng coordination, String title, String snippet, BitmapDescriptor icon) {
 
-        final Marker locMarker = map.addMarker(new MarkerOptions()
+        return map.addMarker(new MarkerOptions()
                 .position(coordination)
                 .title(title)
                 .snippet(snippet)
                 .icon(icon));
-        return locMarker;
     }
 
     public Marker[] addCheckpoints(final GoogleMap map) {
 
         mDatabase.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(DataSnapshot dataSnapshot) {
-               Map<String, String> firebaseMap = (Map) dataSnapshot.getValue();
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                map.clear(); //every time checkpoint status is changed, map elements are cleared and recreated
+                GroundOverlayOptions overlayOptions = new GroundOverlayOptions()
+                        .image(BitmapDescriptorFactory.fromResource(R.drawable.map))
+                        .positionFromBounds(uniBound);
+                GroundOverlay uniOverlay = map.addGroundOverlay(overlayOptions);
+                uniOverlay.setClickable(true);
 
-               for (int i = 0; i<LOCATION_NUMBERS; i++) {
-                   int pos= i+1;
-                   String status = firebaseMap.get("loc" + pos);
-                   LatLng ltlg = checkpoints[i];
-                   String id = String.valueOf(pos);
-                   BitmapDescriptor icon;
+                Map<String, Long> firebaseMap = (Map) dataSnapshot.getValue();
+                for (int i = 0; i<LOCATION_NUMBERS; i++) {
+                    int pos = i+1;
+                    Long status = firebaseMap.get("loc" + pos);
+                    LatLng ltlg = checkpoints[i];
+                    String id = String.valueOf(pos);
+                    BitmapDescriptor icon;
 
-                   if (status.equals("1")) { icon = finishedCheckpoint; }
-                   else { icon = unfinishedCheckpoint; }
-                   uniMarkers[i] = addMarker(map,ltlg,ltlg.toString(),id, icon);
-               }
-           }
+                    if (status==1) { icon = finishedCheckpoint; }
+                    else { icon = unfinishedCheckpoint; }
+                    uniMarkers[i] = addMarker(map,ltlg,ltlg.toString(),id, icon);
 
-           @Override
-           public void onCancelled(DatabaseError databaseError) {
+                    if (i==1 && status==1) {PuzzleActivity.puz1 = 1;}
+                    if (i==3 && status==1) {PuzzleActivity.puz2 = 1;}
+                    if (i==11 && status==1) {PuzzleActivity.puz3 = 1;}
+                    if (i==15 && status==1) {PuzzleActivity.puz4 = 1;}
+                }
+            }
 
-           }
-       });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
         return uniMarkers;
     }
 }

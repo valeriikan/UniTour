@@ -10,8 +10,8 @@
     <string name="loc_name_5">AISEC</string>
     <string name="loc_name_6">IT services</string>
     <string name="loc_name_7">Tellus</string>
-    <string name="loc_name_8">Fablab</string>
-    <string name="loc_name_9">Activity wall</string>
+    <string name="loc_name_8">FabLab</string>
+    <string name="loc_name_9">Main Lobby</string>
     <string name="loc_name_10">Central Station</string>
     <string name="loc_name_11">Student Center</string>
     <string name="loc_name_12">Aava</string>
@@ -24,22 +24,20 @@
         30-seat cabinet kastare. Daily food in the restaurant is delicious and soup of the day manufactured by the chef
         is available.\nKastari carries out the order of Cabinet lunches and other catering. The professional staff will
         tailor services and catering for different occasions.\nTogether with Saalasti hall and lobby in the main building
-        in the University, Kastari forms a unique space with a 1430-seat holding company events, dinners, meetings , seminars,
-        banquets and entertainment events needs.\nOpening time: Monday to Thursday 8.00 to 17.30 ,Friday from 8.00 to
-        14.30.</string>
+        in the University, Kastari forms a unique space with a 1430-seat holding company events, dinners, meetings, seminars,
+        banquets and entertainment events needs.\nOpening time: Mon-Thu 8:00-17:30, Fri 8:00-14:30</string>
     <string name="loc_description_2">If you choose to study for example Information Processing Science, Electrical Engineering
         or Computer Science and Engineering, Tietotalo will be your “home” at the university. Take a look at the first day of
         new students of computer science and engineering at the university!\nhttp://www.oulu.fi/itee/node/40560</string>
     <string name="loc_description_3">Big size, lots of flavour. Nobody leaves our place hungry! Our home food-based lunch makes
         a big impression with its no-nonsense, delicious and plentiful selection. It includes familiar classics and delicious
         favourites from around the world. For more energy, have our protein-rich breakfasts and snacks. Make yourself at hom
-        e in the rugged "man cave"!\nOpening time: Mon-Thu 9.00 - 15.00, Fri 9.00-14.30.</string>
+        e in the rugged "man cave"!\nOpening time: Mon-Thu 9:00-15.00, Fri 9:00-14:30</string>
     <string name="loc_description_4">The Sodankylä Geophysical Observatory performs continuous measurements of the Earth\'s
-        magnetic field, cosmic radio noise, seismic activities, and cosmic rays. The observatory operates two ionospheric
-        radars and plays an active role in the scientific and technical research related to the EISCAT incoherent scatter
-        radar system. An innovative measurement is the tomographic imaging of a 2-dimensional cross-section of the ionosphere
-        from northern Norway to southern Finland. Altogether SGO runs measurements in 19 different locations from southern
-        Finland to Svalbard.\nhttp://oldwww.sgo.fi/index.php\nhttp://www.oulu.fi/sgoenglish/</string>
+        magnetic field, cosmic radio noise, seismic activities, and cosmic rays. Altogether SGO runs measurements in 19
+        different locations from southern Finland to Svalbard.\nMore info in Finnish: http://www.oulu.fi/sgo/\n
+        More info in English: http://www.oulu.fi/sgoenglish/
+</string>
     <string name="loc_description_5">AIESEC is the world\'s largest non-profit student-run organization. It is an international
         non-governmental not-for-profit organization that provides young people with leadership development and cross-cultural
         global internship and volunteer exchange experiences across the globe, with a focus to empower young people so they
@@ -56,12 +54,11 @@
         and entrepreneurship at the heart of University of Oulu\'s Linnanmaa campus and its multidisciplinary community.
         It was created for all you open-minded explorers from both inside and outside of the University to help you meet
         people, get in touch with some of the best experts in town and beyond, expand your networks, develop ideas, share
-        your knowledge, present your projects and create valuable things together with others. </string>
-    <string name="loc_description_8">Fab Lab4School is a small project lead by Center for Ubiquitous Computing at University
-        of Oulu. It aims to make University of Oulu\'s Fab Lab known by all schools and high schools in Oulu area. At long
-        run we plan to create a community among school teachers, pupils and university researchers around the Fab Lab and
-        attract new students to our technical faculties.\nFab Lab4School project leader is MSc. Iván Sánchez Milara, a doctoral
-        researcher at Center for Ubiquitous Computing.\nMore information: http://www.fablab4school.fi/</string>
+        your knowledge, present your projects and create valuable things together with others.\nMore info in English:
+        http://www.oulu.fi/tellusarena/\nMore info in Finnish: http://www.oulu.fi/tellusarena-fi/ </string>
+    <string name="loc_description_8">Fab Lab Oulu is a small digital manufacturing working area (fabrication laboratory)
+        that complies with open innovation concept developed by MIT in the United States. In Fab Lab it is possible to design
+        your own product or hardware from the scratch.\nMore info in English http://www.oulu.fi/fablab/ </string>
     <string name="loc_description_9">Bring various activities into your daily life. There are events happen in the university
         everyday and here is one of the place to witness them take place. Here you can meet International Mother Language
         Day, Career Day,Abipäivät, get to know new friends and buy your latest party tickets.</string>
@@ -73,25 +70,21 @@
     <string name="loc_description_11">Student Center provides comprehensive services for students starting with registration
         to the university and going all the way to alumni services. The Student Center offers services to all students
         including exchange students and doctoral students, and also students who wish to take courses in the Open
-        University.</string>
+        University.\nMore info about studies in English: http://www.oulu.fi/university/node/34985\nMore info about studies
+        in Finnish: http://www.oulu.fi/yliopisto/opiskelijakeskus</string>
     <string name="loc_description_12">Experience the exotic North and harmonious Scandinavian interior design! We conjure up
         taste sensations where classic recipes combine with modern influences from both the East and West. Our menu has
         casual meat and fish dishes, colourful salads, the best seasonal soups and vegetable stews. Rye bread, oatmeal
         porridge and fresh buns makes a good start for the day.\nOpening time:Mon-Thu 7.45-18.30, Fri 8.30-18.00,
         Sat 9.00-15.00</string>
-    <string name="loc_description_13">The museum forms an integral part of an international network of natural science museums
-        functioning as a repository of knowledge and an expert body on biodiversity-related issues.\nThe origin of the
-        University of Oulu Zoological Museum goes back to 1700s when Johan Julin founded the first museum of any kind in
-        Finland in Oulu. In 1923 Oulun luonnoystävien yhdistys (the Oulu Nature Friends Association) restarted the museum
-        activities and later donated the collection to the new University of Oulu.\nThe special built facility for the museum
-        was completed in 1984 in Linnanmaa (University of Oulu campus) including a 2-story space with a dome for showing the
-        collection of flying birds. In 1990 the 57 meters long (187 feet long) diorama was completed by Heikki Kangasperko.
-        Its wall paintings create a complete ecological environment together with the stuffed animals and flora from Northern
-        Norway to Southern Finland. In these dioramas science and art meet in a unique manner.</string>
-    <string name="loc_description_14">Oulu University Library is a scientific library whose task is to provide library and
-        information services for the researchers, teachers and students of the University of Oulu.The Library is open to all
-        public, and in addition to the students and staff of the University of Oulu, it also serves other customers in need
-        of information, particularly in the Northern Finland area.</string>
+    <string name="loc_description_13">The museum forms an integral part of an international network of natural science
+        museums functioning as a repository of knowledge and an expert body on biodiversity-related issues.\n
+        More info in English http://www.oulu.fi/biodiversityunit/node/16772\n
+        More info in Finnish http://www.oulu.fi/biodiversiteettiyksikko/node/1372</string>
+    <string name="loc_description_14">Oulu University Library is a scientific library whose task is to provide library
+        and    information services for the researchers, teachers and students of the University of Oulu.The Library is
+        open to all public.\nMore info about studies in English: http://www.oulu.fi/library/\nMore info about studies in
+        Finnish: http://www.oulu.fi/kirjasto/</string>
     <string name="loc_description_15">The aim is to understand that finding a balance with our families, friends, careers, school,
         sports and so much more can be a challenge. They are offering an alternative to sacrificing the way you feel after
         eating fast food with a fresh homemade approach ready within minutes.\nOpening time: mon-thu 8.30-14.30, lunch
@@ -102,6 +95,14 @@
         degrees, the Faculty offers a variety of postgraduate and continuing education opportunities. There are numerous
         research groups and projects which function in different cooperation and development projects in both the public
         and the private sector.There is also a teacher training school functioning under the auspices of the Faculty of
-        Education.</string>
+        Education.\nMore info in English http://www.oulu.fi/edu/admissions\nMore info in Finnish
+        http://www.oulu.fi/ktk/opiskelijavalinta</string>
+
+    <string name="noInternet">Your internet connection is turned off</string>
+
+    <string name="infoActivity">UniTour application is created to help guests and visitors of the University of Oulu
+        to get acquainted with the most significant locations of the campus. Sign up to play a QR quest or just explore
+        the university map without any registration.\n\nCreated by Team A for the Software Factory Project course in 2017.
+        \n\nhttp://unitour.000webhostapp.com/</string>
 
 </resources>

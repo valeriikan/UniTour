@@ -8,10 +8,14 @@
 
     <TextView
         android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="50dp"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
+        android:textSize="18sp"
         android:text="What picture is right?"/>
 
     <LinearLayout
@@ -21,7 +25,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/question"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="23dp">
 
         <ImageView
             android:id="@+id/img1"
@@ -43,7 +47,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/question"
-        android:layout_marginTop="22dp">
+        android:layout_marginTop="15dp">
 
         <ImageView
             android:id="@+id/frame1"

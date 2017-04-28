@@ -1,6 +1,9 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,15 +46,26 @@ public class MainActivity extends AppCompatActivity {
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
-                startActivity(intent);
+                if (isOnline()) {
+                    Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         imgTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,QuestMapActivity.class);
-                startActivity(intent);
+                if (isOnline()) {
+                    Intent intent = new Intent(MainActivity.this,QuestMapActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.noInternet, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         imgExplore.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +98,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
-            case R.id.action_exit:
-                // close app
-                finish();
-                System.exit(0);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

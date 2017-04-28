@@ -45,22 +45,27 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, ImageGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Kastari, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
             case "2":
                 if (result.equals("sfw2017-unitour-tietotalo")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz1 = 1;
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Tietotalo, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -69,22 +74,27 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, RightAnswerGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Datagarage, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
             case "4":
                 if (result.equals("sfw2017-unitour-sgo")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz2 = 1;
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Sodankylä Geophysical Observatory, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -93,10 +103,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, SpecificQuestionGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in AISEC, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -105,10 +117,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, TrueFalseGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in IT services, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -117,10 +131,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, SpecificQuestionGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Tellus, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -129,10 +145,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, RightAnswerGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Fablab, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -141,10 +159,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, YoutubeActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not near Activity wall, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -153,10 +173,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, YoutubeActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Central Station, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -165,22 +187,27 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, YoutubeActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Student Center, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
             case "12":
                 if (result.equals("sfw2017-unitour-aava")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz3 = 1;
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Aava, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -189,10 +216,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, ImageGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Zoological Museum, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -201,10 +230,12 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, YoutubeActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Pegasus Library, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
@@ -213,25 +244,29 @@ public class QrScannerActivity extends Activity implements ZXingScannerView.Resu
                     Intent game = new Intent(this, TrueFalseGameActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Balance, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
 
             case "16":
                 if (result.equals("sfw2017-unitour-facultyofeducation")) {
-                    Intent game = new Intent(this, MainActivity.class);
+                    Intent game = new Intent(this, PuzzleActivity.class);
                     game.putExtra("LOCATION_ID", placeId);
+                    PuzzleActivity.puz4 = 1;
                     startActivity(game);
+                    this.finish();
                 } else {
                     Intent map = new Intent(this, QuestMapActivity.class);
                     startActivity(map);
                     Toast.makeText(this, "You are not in Faculty of Education, get back to the map and find the place", Toast.LENGTH_LONG).show();
+                    this.finish();
                 }
                 break;
         }
     }
-
 }

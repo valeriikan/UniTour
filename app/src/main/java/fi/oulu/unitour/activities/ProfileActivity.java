@@ -1,12 +1,16 @@
 package fi.oulu.unitour.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,8 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.Map;
-
 import fi.oulu.unitour.R;
 import fi.oulu.unitour.helpers.CircleTransform;
 
@@ -27,8 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
     //declaration of variables for layout elements
     RelativeLayout profileContent;
     ProgressBar profileLoading;
-    TextView tvMainName;
-    ImageView mainUserpic;
+    TextView tvMainName, tvUnitourScore, tvCheckpoints;
+    ImageView mainUserpic, imgProfileBackground;
 
     //Firebase authentication objects
     FirebaseAuth mAuth;
@@ -43,6 +45,10 @@ public class ProfileActivity extends AppCompatActivity {
         profileContent = (RelativeLayout) findViewById(R.id.profileContent);
         profileLoading = (ProgressBar) findViewById(R.id.profileLoading);
         tvMainName = (TextView) findViewById(R.id.tvProfileName);
+        tvUnitourScore = (TextView) findViewById(R.id.tvUnitourScore);
+        tvCheckpoints = (TextView) findViewById(R.id.tvCheckpoints);
+        imgProfileBackground = (ImageView) findViewById(R.id.imgProfileBackground);
+        imgProfileBackground.setImageResource(R.drawable.ui_profile_background);
         mainUserpic = (ImageView) findViewById(R.id.profileUserpic);
         mainUserpic.setImageResource(R.drawable.ui_applogo);
 
@@ -65,10 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = (Map) dataSnapshot.getValue();
-                String name = map.get("name");
-                String imageUrl = map.get("imageUrl");
+                String name = dataSnapshot.child("name").getValue(String.class);
+                String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
+                int score = dataSnapshot.child("score").getValue(int.class);
+                int completed = dataSnapshot.child("completed").getValue(int.class);
                 tvMainName.setText(name);
+                tvUnitourScore.setText(String.valueOf(score));
+                tvCheckpoints.setText(String.valueOf(completed));
                 Picasso.with(ProfileActivity.this).load(imageUrl).fit().centerCrop()
                         .transform(new CircleTransform()).into(mainUserpic, callback);
             }
@@ -78,5 +87,29 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // menu items
+        switch (id) {
+            case R.id.action_logout:
+                // sign out
+                mAuth.signOut();
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, WelcomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

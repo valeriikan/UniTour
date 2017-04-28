@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fi.oulu.unitour.activities.PuzzleActivity">
+
+    <LinearLayout
+        android:id="@+id/layoutPuzzleFirstline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+        
+        <ImageView
+            android:id="@+id/imgPuzzle1"
+            android:layout_width="165dp"
+            android:layout_height="165dp" />
+
+        <ImageView
+            android:id="@+id/imgPuzzle2"
+            android:layout_width="165dp"
+            android:layout_height="165dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutPuzzleSecondline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/layoutPuzzleFirstline">
+
+        <ImageView
+            android:id="@+id/imgPuzzle3"
+            android:layout_width="165dp"
+            android:layout_height="165dp" />
+
+        <ImageView
+            android:id="@+id/imgPuzzle4"
+            android:layout_width="165dp"
+            android:layout_height="165dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPuzzle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnPuzzle"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Keep collecting"/>
+
+    <Button
+        android:id="@+id/btnPuzzle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/view_button"
+        android:textColor="#000000"
+        android:text="Continue" />
+
+</RelativeLayout>
