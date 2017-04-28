@@ -136,10 +136,8 @@ public class ImageGameActivity extends AppCompatActivity {
                         Toast.makeText(ImageGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
+                        imageButton.setEnabled(false);
                         recordData();
-                        Intent map = new Intent(ImageGameActivity.this, QuestMapActivity.class);
-                        startActivity(map);
-                        finish();
                         Toast.makeText(ImageGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                         break;
                 }
@@ -184,8 +182,20 @@ public class ImageGameActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+                //back to map when all the data is updated
+                Intent map = new Intent(ImageGameActivity.this, QuestMapActivity.class);
+                map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(map);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent map = new Intent(this, QuestMapActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(map);
+        finish();
     }
 }

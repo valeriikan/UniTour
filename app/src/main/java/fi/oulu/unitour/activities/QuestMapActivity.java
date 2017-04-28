@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -66,7 +65,15 @@ public class QuestMapActivity extends AppCompatActivity
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
         mapFragment.getMapAsync(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         //Firebase authentication object declaration
+        //checks each checkpoint status and clickability
+        //runs reward activity if all checkpoints are completed
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("gamedata");
@@ -80,18 +87,10 @@ public class QuestMapActivity extends AppCompatActivity
                     sum = sum + value;
                 }
 
-                Log.wtf("myTag", String.valueOf(sum));
-
                 if (sum == 16) {
                     Intent intent = new Intent(QuestMapActivity.this, RewardActivity.class);
                     startActivity(intent);
                 }
-                /*int completed = dataSnapshot.child("completed").getValue(int.class);
-                if (completed==16) {
-                    Intent intent = new Intent(QuestMapActivity.this, RewardActivity.class);
-                    startActivity(intent);
-                }*/
-
             }
 
             @Override
@@ -136,7 +135,7 @@ public class QuestMapActivity extends AppCompatActivity
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        //disable clickability if checkpoint is completed; opens exploreActivity if not
+        //disable clickability if checkpoint is completed; opens quest Activity if not
         String position = marker.getSnippet();
         Long status = mapClick.get("loc" + position);
         if (status==0) {
@@ -161,6 +160,6 @@ public class QuestMapActivity extends AppCompatActivity
         Intent intent = new Intent(QuestMapActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        this.finish();
+        finish();
     }
 }

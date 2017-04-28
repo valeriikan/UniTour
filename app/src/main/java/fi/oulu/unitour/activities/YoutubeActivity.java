@@ -17,6 +17,7 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
 import fi.oulu.unitour.R;
+import fi.oulu.unitour.helpers.YoutubeFragment;
 
 public class YoutubeActivity extends AppCompatActivity {
 
@@ -61,10 +62,9 @@ public class YoutubeActivity extends AppCompatActivity {
         btnYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btnYoutube.setEnabled(false);
                 recordData();
-                Intent map = new Intent(YoutubeActivity.this, QuestMapActivity.class);
-                startActivity(map);
-                Toast.makeText(YoutubeActivity.this, "You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                Toast.makeText(YoutubeActivity.this, "You gained 5 UniTour points", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -106,8 +106,19 @@ public class YoutubeActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+                Intent map = new Intent(YoutubeActivity.this, QuestMapActivity.class);
+                map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(map);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent map = new Intent(this, QuestMapActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(map);
+        finish();
     }
 }

@@ -64,11 +64,9 @@ public class RightAnswerGameActivity extends AppCompatActivity {
             rightAnswerBtn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    rightAnswerBtn4.setEnabled(false);
                     recordData();
-                    Intent map = new Intent(RightAnswerGameActivity.this, QuestMapActivity.class);
-                    startActivity(map);
-                    finish();
-                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour point", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
 
                 }
             });
@@ -85,11 +83,9 @@ public class RightAnswerGameActivity extends AppCompatActivity {
             rightAnswerBtn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    rightAnswerBtn3.setEnabled(false);
                     recordData();
-                    Intent map = new Intent(RightAnswerGameActivity.this, QuestMapActivity.class);
-                    startActivity(map);
-                    finish();
-                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 1 UniTour point", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RightAnswerGameActivity.this, "Correct answer! You gained 8 UniTour point", Toast.LENGTH_LONG).show();
 
                 }
             });
@@ -153,8 +149,19 @@ public class RightAnswerGameActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+                Intent map = new Intent(RightAnswerGameActivity.this, QuestMapActivity.class);
+                map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(map);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent map = new Intent(this, QuestMapActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(map);
+        finish();
     }
 }

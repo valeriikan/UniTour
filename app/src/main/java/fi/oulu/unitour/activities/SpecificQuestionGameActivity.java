@@ -58,10 +58,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("2")) {
+                        submitBtn.setEnabled(false);
                         recordData();
-                        Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
-                        startActivity(map);
-                        finish();
                         Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
@@ -80,10 +78,8 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     String str = answerET.getText().toString();
                     if (str.equals("6")) {
-                        recordData();
-                        Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
-                        startActivity(map);
-                        finish();
+                        submitBtn.setEnabled(false);
+                        recordData();;
                         Toast.makeText(SpecificQuestionGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(SpecificQuestionGameActivity.this, "Wrong answer. Try again", Toast.LENGTH_SHORT).show();
@@ -130,8 +126,19 @@ public class SpecificQuestionGameActivity extends AppCompatActivity{
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+                Intent map = new Intent(SpecificQuestionGameActivity.this, QuestMapActivity.class);
+                map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(map);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent map = new Intent(this, QuestMapActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(map);
+        finish();
     }
 }

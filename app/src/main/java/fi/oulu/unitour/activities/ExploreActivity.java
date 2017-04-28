@@ -1,24 +1,12 @@
 package fi.oulu.unitour.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
 import com.bluejamesbond.text.DocumentView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import java.util.Map;
 
 import fi.oulu.unitour.R;
 import fi.oulu.unitour.helpers.RoundedCornersTransform;

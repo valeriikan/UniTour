@@ -3,7 +3,10 @@ package fi.oulu.unitour.helpers;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,6 +54,10 @@ public class QuestMapPointMaker {
     private static final BitmapDescriptor unfinishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_redstar);
     private static final BitmapDescriptor finishedCheckpoint = BitmapDescriptorFactory.fromResource(R.drawable.marker_completed);
 
+    private LatLngBounds uniBound = new LatLngBounds(
+            new LatLng(65.056704, 25.463102),       // South west corner
+            new LatLng(65.061842, 25.470193));      // North east corner
+
     //Firebase authentication objects
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -73,11 +80,17 @@ public class QuestMapPointMaker {
 
     public Marker[] addCheckpoints(final GoogleMap map) {
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Long> firebaseMap = (Map) dataSnapshot.getValue();
+                map.clear(); //every time checkpoint status is changed, map elements are cleared and recreated
+                GroundOverlayOptions overlayOptions = new GroundOverlayOptions()
+                        .image(BitmapDescriptorFactory.fromResource(R.drawable.map))
+                        .positionFromBounds(uniBound);
+                GroundOverlay uniOverlay = map.addGroundOverlay(overlayOptions);
+                uniOverlay.setClickable(true);
 
+                Map<String, Long> firebaseMap = (Map) dataSnapshot.getValue();
                 for (int i = 0; i<LOCATION_NUMBERS; i++) {
                     int pos = i+1;
                     Long status = firebaseMap.get("loc" + pos);
@@ -101,7 +114,6 @@ public class QuestMapPointMaker {
 
             }
         });
-
         return uniMarkers;
     }
 }

@@ -52,10 +52,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
             trueFalseBtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    trueFalseBtn1.setEnabled(false);
                     recordData();
-                    Intent map = new Intent(TrueFalseGameActivity.this, QuestMapActivity.class);
-                    startActivity(map);
-                    finish();
                     Toast.makeText(TrueFalseGameActivity.this, "Correct answer! You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                 }
             });
@@ -80,10 +78,8 @@ public class TrueFalseGameActivity extends AppCompatActivity {
             trueFalseBtn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    trueFalseBtn2.setEnabled(false);
                     recordData();
-                    Intent map = new Intent(TrueFalseGameActivity.this, QuestMapActivity.class);
-                    startActivity(map);
-                    finish();
                     Toast.makeText(TrueFalseGameActivity.this, "Correct answer! Balance closes at 13:30. You gained 8 UniTour points", Toast.LENGTH_LONG).show();
                 }
             });
@@ -127,8 +123,19 @@ public class TrueFalseGameActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
+                Intent map = new Intent(TrueFalseGameActivity.this, QuestMapActivity.class);
+                map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(map);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent map = new Intent(this, QuestMapActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(map);
+        finish();
     }
 }
