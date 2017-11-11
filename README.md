@@ -4,3 +4,5 @@ UniTour is the application that helps the guests of the University of Oulu to ge
 UniTour use Firebase database and support signing in with own Facebook or Google accounts.
 
 Created by Valerii Kan, Majid Aghaei, Kevin Mendez, Xiaocan Zeng, Pan Zhang and Mohammad Jawad Reza Bakhsh for Software Factory Project course at the University of Oulu.
+
+![Application diagram](image.png)
